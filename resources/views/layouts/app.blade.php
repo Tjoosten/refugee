@@ -40,14 +40,16 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Solidarity for all - Trips
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="">Acties</a></li>
+                    <li><a href="">Ritten</a></li>
+                    <li><a href="">Contact</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -63,6 +65,19 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                {{-- TODO: need to set an if else statement for the permission. --}}
+                                <li>
+                                    <a href="{{ route('acl') }}">
+                                        <span class="fa fa-btn fa-user"></span> Gebruikers beheer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <span class="fa fa-btn fa-file-text-o"></span>
+                                        Meld een bug!
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -71,8 +86,9 @@
             </div>
         </div>
     </nav>
-
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

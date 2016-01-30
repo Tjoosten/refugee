@@ -25,13 +25,16 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
-    Route::get('/home', 'HomeController@index');
+    Route::get('acl', [
+        'as' => 'acl', 'uses' => 'UserManagementController@userList'
+    ]);
+    Route::get('acl/block/{status}/{id}', [
+        'as' => 'acl.block', 'uses' => 'UserManagementController@blockControl'
+    ]);
+    Route::get('/banned', [
+       'as' => 'acl.banned', 'uses' => 'UserManagementController@banMessage'
+    ]);
+    Route::get('/', 'HomeController@index');
 });
