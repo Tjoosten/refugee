@@ -62,6 +62,17 @@ class UserManagementController extends Controller
             Sessions::where('user_id', $id)->delete();
         }
 
+        // Set flash message data.
+        // Displayed when u block a user
+        if () {
+
+        } elseif() {
+
+        }
+
+        session()->flash('', '');
+        session()->flash('', '');
+
         return Redirect::back();
     }
 
@@ -81,8 +92,10 @@ class UserManagementController extends Controller
      * userDelete
      *
      * Softdelete the user. So he have time to come back.
+     *
+     * @param $userId
      */
-    public function deleteUser()
+    public function deleteUser($userId)
     {
 
     }

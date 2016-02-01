@@ -48,7 +48,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="">Acties</a></li>
-                    <li><a href="">Ritten</a></li>
+                    <li><a href="{!! route('trips.index') !!}">Ritten</a></li>
                     <li><a href="">Contact</a></li>
                 </ul>
 
@@ -87,6 +87,21 @@
         </div>
     </nav>
     <div class="container">
+        {{-- Flash message --}}
+        @if(Session::has('flash_message'))
+            <div id="alert-flash" class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+                @if(Session::has('flash_message_important'))
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                @endif
+                <h4>{{ session('flash_title') }}</h4>
+
+                {{ session('flash_message')  }}
+            </div>
+        @endif
+        {{-- END Flash message --}}
+
         @yield('content')
     </div
 
@@ -94,5 +109,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script>
+        $("#alert-flash").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").alert('close');
+        });
+    </script>
 </body>
 </html>

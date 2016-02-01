@@ -13,7 +13,7 @@ class tripValidation extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class tripValidation extends Request
     public function rules()
     {
         return [
-            //
+            'region'      => 'required|max:75',
+            'destination' => 'required',
+            'date'        => 'required',
+
+            // User info
+            'name'        => 'required',
+            'email'       => 'required',
+            'telephone'   => 'required',
         ];
     }
 }
