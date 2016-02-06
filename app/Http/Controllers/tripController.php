@@ -7,7 +7,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Requests\tripValidation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\intrestValidation;
 
 class tripController extends Controller
 {
@@ -17,24 +19,34 @@ class tripController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('blocked');
     }
 
     /**
      * index
      *
      * Get an overview off the trips. To the refugee camps.
+     *
+     * @param  null $selector
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($selector = null)
     {
         $data['title'] = "";
 
         // Trips counts
-        $data['all']       = Trips::paginate(15);
-        $data['calais']    = Trips::where('destination', 1)->get();
+        $data['all'] = Trips::paginate(15);
+        $data['calais'] = Trips::where('destination', 1)->get();
         $data['duinkerke'] = Trips::where('destination', 2)->get();
 
         // Data selection
-        $data['query'] = Trips::all();
+        if ($selector == 'calais') {
+            $data['query'] = $data['calais'];
+        } elseif ($selector == 'duinkerke') {
+            $data['query'] = $data['duinkerke'];
+        } else {
+            $data['query'] = $data['all'];
+        }
 
         return view('frontend.trips', $data);
     }
@@ -44,14 +56,16 @@ class tripController extends Controller
      *
      * Insert a new trip into the system.
      *
-     * TODO: Set flash message.
-     *
      * @param Requests\tripValidation $request
      */
     public function insert(tripValidation $request)
     {
         $data = array_add($request->except('_token'), 'user_id', Auth::user()->id);
         Trips::create($data);
+
+        session()->flash('flash_title', '');
+        session()->flash('flash_message', '');
+        session()->flash('flash_message_important', false);
 
         return Redirect::back();
     }
@@ -75,10 +89,32 @@ class tripController extends Controller
     /**
      * intrested
      *
-     * @param int $tripId, The id of the trip.
+     * @param intrestValidation $request
+     * @param int $tripId , The id of the trip.
      */
-    public function intrested($tripId)
+    public function intrested(intrestValidation $request, $tripId)
     {
-        // TODO: write mail logic.
+        $trip = Trips::findOrfail($tripId);
+        $data = $request->all();
+
+        // Mail trip owner
+        Mail::queue('emails.intrested_owner', $data, function($message) use ($trip) {
+            $message->from('topairy@gmail.com', 'Solidarity for all - TRIPS');
+            $message->subject('Iemand heeft intresse om mee te rijden.');
+            $message->to($trip->email);
+        });
+
+        // Mail intrested person.
+        // Mail::queue('emails.intrested_person', $data, function($message) use ($request) {
+        //    $message->from('topairy@gmail.com', 'Solidarity for all - TRIPS');
+        //    $message->to($request->email);
+        // });
+
+        // Set flash message
+        session()->flash('flash_title', 'Success!');
+        session()->flash('flash_message', 'We hebben de eigenaar een berichtt gestuurd. hij zal spoedig contact met je opnemen');
+        session()->flash('flash_message_important', true);
+
+        return Redirect::back();
     }
 }

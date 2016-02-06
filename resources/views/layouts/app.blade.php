@@ -48,7 +48,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="">Acties</a></li>
-                    <li><a href="{!! route('trips.index') !!}">Ritten</a></li>
+                    <li><a href="{!! route('trips.index', ['selector' => 'all']) !!}">Ritten</a></li>
                     <li><a href="">Contact</a></li>
                 </ul>
 
@@ -65,10 +65,18 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                {{-- TODO: need to set an if else statement for the permission. --}}
+                                @if(Auth::user()->is('admin') || Auth::user()->is('developer'))
+                                    <li>
+                                        <a href="{!! route('acl') !!}">
+                                            <span class="fa fa-btn fa-user"></span>
+                                            Gebruikers beheer
+                                        </a>
+                                    </li>
+                                @endif
                                 <li>
-                                    <a href="{{ route('acl') }}">
-                                        <span class="fa fa-btn fa-user"></span> Gebruikers beheer
+                                    <a href="">
+                                        <span class="fa fa-btn fa-cogs"></span>
+                                        Account configuratie
                                     </a>
                                 </li>
                                 <li>

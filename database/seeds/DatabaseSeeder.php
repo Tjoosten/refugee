@@ -25,10 +25,6 @@ class DatabaseSeeder extends Seeder
          *                   This user can be removed when there,
          *                   is a fully access administrator.
          *
-         * roleTableSeeder = Seed the user roles to the database.
-         *
          */
-
-        $this->call(roleTableSeeder::class);
     }
 }

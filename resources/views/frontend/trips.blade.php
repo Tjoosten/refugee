@@ -8,9 +8,11 @@
             <li role="presentation" @if(count($errors->all()) == 0) class="active" @endif>
                 <a href="#ritten" aria-controls="home" role="tab" data-toggle="tab">Ik zoek een plaats</a>
             </li>
-            <li role="presentation" @if(count($errors->all()) > 0) class="active" @endif>
-                <a href="#rijden" aria-controls="profile" role="tab" data-toggle="tab">Ik wil rijden</a>
-            </li>
+            @if(Auth::check())
+                <li role="presentation" @if(count($errors->all()) > 0) class="active" @endif>
+                    <a href="#rijden" aria-controls="profile" role="tab" data-toggle="tab">Ik wil rijden</a>
+                </li>
+            @endif
         </ul>
 
         {{-- Tabs content --}}
@@ -52,7 +54,7 @@
                                                 Verwijderen
                                             </a>
                                         @else
-                                            <a href="" class="label label-danger"> Meerijden </a>
+                                            <a href="{{route('trips.intrest', ['id' => $trip->id]) }}" class="label label-danger"> Meerijden </a>
                                         @endif
                                     </td>
                                 </tr>
@@ -69,77 +71,79 @@
                 </div>
             </div>
 
-            <div class="tab-pane @if(count($errors->all()) > 0) active @endif" id="rijden" role="tabpanel">
-                <div style="padding-top: 15px;">
-                    <form method="POST" action="{{ route('trips.create') }}">
-                        {{-- CSRF protection --}}
-                        {{ csrf_field() }}
+            @if(Auth::check())
+                <div class="tab-pane @if(count($errors->all()) > 0) active @endif" id="rijden" role="tabpanel">
+                    <div style="padding-top: 15px;">
+                        <form method="POST" action="{{ route('trips.create') }}">
+                            {{-- CSRF protection --}}
+                            {{ csrf_field() }}
 
-                        <div class="form-group row">
-                            <label for="naam" class="col-sm-3 form-control-label">Naam:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-sm" name="name" id="naam" placeholder="Jouw naam">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-3 form-control-label">Email:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-sm" name="email" id="email" placeholder="Jouw email adres">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="telephone" class="col-sm-3 form-control-label">GSM nr:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-sm" name="telephone" id="telephone" placeholder="Jouw GSM nr.">
-                            </div>
-                        </div>
-                        <div class="form-group row {{ $errors->has('date') ? 'has-error' : '' }}">
-                            <label for="date" class="col-sm-3 form-control-label">Datum vertrek:</label>
-                            <div class="col-sm-4">
-                                <input type="text" value="{{ old('date') }}" class="form-control form-control-sm" name="date" id="telephone" placeholder="Datum van vertrek">
-                                <small class="text-muted"> Format: dd/mm/yyyy </small>
-                            </div>
-                        </div>
-                        <div class="form-group row {{ $errors->has('region') ? ' has-error' : '' }}">
-                            <label for="regio" class="col-sm-3 form-control-label">Regio:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-sm" name="region" value="{{ old('region') }}" id="telephone" placeholder="Vertrek regio.">
-                                <small class="text-muted">Alleen plaatsnamen.</small>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="places" class="col-sm-3 form-control-label">Beschikbare plaatsen:</label>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control form-control-sm" name="places" id="telephone" placeholder="Aantal">
-                            </div>
-                        </div>
-                        <div class="form-group row {{ $errors->has('destination') ? 'has-error' : '' }} ">
-                            <label for="regio" class="col-sm-3 form-control-label">Bestemming:</label>
-                            <div class="col-sm-4">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="destination" id="optionsRadios1" value="1">
-                                        Calais
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="destination" id="optionsRadios2" value="2">
-                                        Duinkerke
-                                    </label>
+                            <div class="form-group row">
+                                <label for="naam" class="col-sm-3 form-control-label">Naam:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-sm" name="name" id="naam" placeholder="Jouw naam">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-offset-3">
-                                <button type="submit" class="btn btn-success">Insturen</button>
-                                <button type="reset" class="btn btn-danger">reset</button>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-3 form-control-label">Email:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-sm" name="email" id="email" placeholder="Jouw email adres">
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="form-group row">
+                                <label for="telephone" class="col-sm-3 form-control-label">GSM nr:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-sm" name="telephone" id="telephone" placeholder="Jouw GSM nr.">
+                                </div>
+                            </div>
+                            <div class="form-group row {{ $errors->has('date') ? 'has-error' : '' }}">
+                                <label for="date" class="col-sm-3 form-control-label">Datum vertrek:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" value="{{ old('date') }}" class="form-control form-control-sm" name="date" id="telephone" placeholder="Datum van vertrek">
+                                    <small class="text-muted"> Format: dd/mm/yyyy </small>
+                                </div>
+                            </div>
+                            <div class="form-group row {{ $errors->has('region') ? ' has-error' : '' }}">
+                                <label for="regio" class="col-sm-3 form-control-label">Regio:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-sm" name="region" value="{{ old('region') }}" id="telephone" placeholder="Vertrek regio.">
+                                    <small class="text-muted">Alleen plaatsnamen.</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="places" class="col-sm-3 form-control-label">Beschikbare plaatsen:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control form-control-sm" name="places" id="telephone" placeholder="Aantal">
+                                </div>
+                            </div>
+                            <div class="form-group row {{ $errors->has('destination') ? 'has-error' : '' }} ">
+                                <label for="regio" class="col-sm-3 form-control-label">Bestemming:</label>
+                                <div class="col-sm-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="destination" id="optionsRadios1" value="1">
+                                            Calais
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="destination" id="optionsRadios2" value="2">
+                                            Duinkerke
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-offset-3">
+                                    <button type="submit" class="btn btn-success">Insturen</button>
+                                    <button type="reset" class="btn btn-danger">reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+            @endif
             </div>
-        </div>
         {{-- End tab content --}}
     </div>
     <div class="col-xs-3 col-sm-3 col-md-9 col-lg-3">

@@ -2,34 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use Bouncer;
 use App\user;
 use App\Sessions;
 use App\Http\Requests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class UserManagementController extends Controller
 {
-    // TODO: Make middleware that checks if the user is blocked.
-    //       This needs to be set on every request.
-    //       If blocked the middleware needs to be redirect to a page
-    //       That displays information and possible reasons.
-
     /**
      * Class constructor
      */
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('blocked');
+    }
+
+    /**
+     * makeAdmin
+     *
+     * @param $id
+     *
+     * @return
+     */
+    public function makeAdmin($id)
+    {
+        if (! Auth::user()->is('admin')) {
+            return Redirect::route('trips.index');
+        }
+
+        $user = User::find($id);
+        Bouncer::assign('admin')->to($user);
+        Bouncer::refreshFor($user);
+
+        // Flash method
+        session()->flash('flash_title', '');
+        session()->flash('', '');
+        session()->flash('', '');
+
+        return Redirect::route('acl');
+    }
+
+    /**
+     * makeUser
+     *
+     * @param $id
+     *
+     * @return
+     */
+    public function makeUser($id)
+    {
+        if (! Auth::user()->is('admin')) {
+            return Redirect::route('trips.index');
+        }
+
+        $user = User::find($id);
+        Bouncer::retract('admin')->from($user);
+        Bouncer::refreshFor($user);
+
+
+        // Flash method
+        session()->flash('flash_title', '');
+        session()->flash('', '');
+        session()->flash('', '');
+
+        return Redirect::route('acl');
     }
 
     /**
      * userList
      *
+     * TODO: set pagination to the view.
+     *
      * Get the user list of the system.
      */
     public function userList()
     {
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+            return Redirect::route('trips.index');
+        }
+
         $data['title'] = trans('sfa.titleUserControl');
         $data['users'] = User::paginate(15);
 
@@ -52,6 +106,10 @@ class UserManagementController extends Controller
      */
     public function blockControl($status, $id)
     {
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer') || Auth::user()->is('moderator')) {
+            return Redirect::route('trips.index', ['selector' => 'all']);
+        }
+
         $user         = user::find($id);
         $user->status = $status;
         $user->save();
@@ -64,28 +122,22 @@ class UserManagementController extends Controller
 
         // Set flash message data.
         // Displayed when u block a user
-        if () {
-
-        } elseif() {
-
+        if ($status == 0) {
+            // unblock
+            $message = 'U hebt een gebruiker terug geactiveerd';
+        } elseif($status == 1) {
+            // block
+            $message = 'U hebt een gebruik geblokkeer';
+        } else {
+            // unknown
+            $message = 'wij konden niet uitmaken welke handeling u wou uitvoeren.';
         }
 
-        session()->flash('', '');
-        session()->flash('', '');
+        session()->flash('flash_title', 'Success!');
+        session()->flash('flash_message', $message);
+        session()->flash('flash_message_important', '');
 
         return Redirect::back();
-    }
-
-    /**
-     * banMessage
-     *
-     * The view with the error message if a user is banned.
-     */
-    public function banMessage()
-    {
-        $data['title'] = 'Banned!';
-
-        return view('errors.blocked');
     }
 
     /**
@@ -97,6 +149,18 @@ class UserManagementController extends Controller
      */
     public function deleteUser($userId)
     {
+        // User can be a developer or admin.
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+            return Redirect::route('trips.index', ['selector' => 'all']);
+        }
 
+        $user = User::find($userId);
+        $user->delete();
+
+        session()->flash('flash_title', '');
+        session()->flash('flash_message', '');
+        session()->flash('flash_message_important', false);
+
+        return Redirect::route('trips.index');
     }
 }

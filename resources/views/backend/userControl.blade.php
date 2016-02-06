@@ -19,6 +19,7 @@
                     @foreach($users as $user)
                         <tr>
                             <td><code> #{!! $user->id !!} </code></td>
+
                             <td>{!! $user->name !!}</td>
 
                             <td>
@@ -34,16 +35,21 @@
                             {{-- Functions --}}
                             <td>
                                 <div class="btn-group">
-                                    @if($user->status == 0)
                                     <a class="btn btn-danger btn-xs" href="{{ route('acl.block', ['status' => 1, 'id' => $user->id]) }}">
                                         <span class="fa fa-lock"></span>
                                     </a>
-                                    @elseif($user->status == 1)
-                                    <a class="btn btn-danger btn-xs" href="{{ route('acl.block', ['status' => 0, 'id' => $user->id]) }}">
-                                        <span class="fa fa-unlock"></span>
-                                    </a>
+
+                                    @if(Auth::user()->is('admin'))
+                                        <a class="btn btn-success btn-xs" href="{!! route('make.user', ['id' => $user->id]) !!}">
+                                            <span class="fa fa-key"></span>
+                                        </a>
+                                    @else
+                                        <a class="btn btn-danger btn-xs" href="{!! route('make.admin', ['id' => $user->id]) !!}">
+                                            <span class="fa fa-key"></span>
+                                        </a>
                                     @endif
-                                    <a class="btn btn-danger btn-xs">
+
+                                    <a href="" class="btn btn-danger btn-xs">
                                         <span class="fa fa-user"></span>
                                     </a>
                                     <a class="btn btn-danger btn-xs" href="">
@@ -72,7 +78,6 @@
                 <a class="list-group-item">
                     Alle gebruikers
                     <span class="pull-right badge"> {!! $all !!} </span>
-                </a>
                 </a>
                 <a class="list-group-item">
                     Actieve leden

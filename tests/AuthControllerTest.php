@@ -11,7 +11,8 @@ class AuthControllerTest extends TestCase
      */
     public function testRegisterView()
     {
-        $this->visit('/register')->seeStatusCode(200);
+        $route = $this->visit('/register');
+        $route->seeStatusCode(200);
     }
 
     /**
@@ -29,9 +30,9 @@ class AuthControllerTest extends TestCase
         $data['password_confirmation'] = bcrypt($user->password);
 
         // test login method.
-        $this->post('/register', $data)
-            ->seeStatusCode(302)
-            ->seeInDatabase('users', $user->toArray());
+        $route = $this->post('/register', $data);
+        $route->seeStatusCode(302);
+        $route->seeInDatabase('users', $user->toArray());
     }
 
     /**
@@ -39,7 +40,8 @@ class AuthControllerTest extends TestCase
      */
     public function testLoginView()
     {
-        $this->visit('/login')->seeStatusCode(200);
+        $route = $this->visit('/login');
+        $route->seeStatusCode(200);
     }
 
     /**
@@ -55,6 +57,7 @@ class AuthControllerTest extends TestCase
         $data['password'] = $user->password;
 
         // test login method.
-        $this->post('/login', $data)->seeStatusCode(302);
+        $url = $this->post('/login', $data);
+        $url->seeStatusCode(302);
     }
 }

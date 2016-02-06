@@ -14,7 +14,7 @@
             <a class="btn btn-success btn-lg" href="">
                 <span class="fa fa-btn fa-asterisk"></span> Acties
             </a>
-            <a class="btn btn-danger btn-lg" href="{!! route('trips.index') !!}">
+            <a class="btn btn-danger btn-lg" href="{!! route('trips.index', ['selector' => 'all']) !!}">
                 <span class="fa fa-btn fa-car"></span> Ritten
             </a>
         </div>

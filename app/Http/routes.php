@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-
-});
+use Illuminate\Support\Facades\Response;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +28,15 @@ Route::get('/', function () {
 /**
  * API routing
  */
+Route::group(['middleware' => ['api', 'auth:api']], function() {
+
+        Route::get('/api' ,       'apiController@index');
+
+        // Profile routes.
+
+        // Trips
+        Route::get('/trips',   'apitripsController@index');
+});
 
 /**
  * WEB routing.
@@ -41,12 +49,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     // ACL routes.
-    Route::get('acl',                     ['as' => 'acl',          'uses' => 'UserManagementController@userList']);
-    Route::get('acl/block/{status}/{id}', ['as' => 'acl.block',    'uses' => 'UserManagementController@blockControl']);
-    Route::get('banned',                  ['as' => 'acl.banned',   'uses' => 'UserManagementController@banMessage']);
+    Route::get('acl',                     ['as' => 'acl',           'uses' => 'UserManagementController@userList']);
+    Route::get('acl/block/{status}/{id}', ['as' => 'acl.block',     'uses' => 'UserManagementController@blockControl']);
+    Route::get('acl/make/admin/{id}',     ['as' => 'make.admin',    'uses' => 'UserManagementController@makeAdmin']);
+    Route::get('acl/make/user/{id}',      ['as' => 'make.user',     'uses' => 'userManagementController@makeUser']);
+    Route::get('banned',                  ['as' => 'acl.banned',    'uses' => 'UserManagementController@banMessage']);
 
     // Trips routes.
-    Route::get('trips',                   ['as' => 'trips.index',  'uses' => 'tripController@index']);
-    Route::get('trips/delete/{id}',       ['as' => 'trips.delete', 'uses' => 'tripController@delete']);
-    Route::post('trips',                  ['as' => 'trips.create', 'uses' => 'tripController@insert']);
+    Route::get('trips/{selector}',        ['as' => 'trips.index',   'uses' => 'tripController@index']);
+    Route::get('trips/delete/{id}',       ['as' => 'trips.delete',  'uses' => 'tripController@delete']);
+    Route::get('trips/intrested/{id}',    ['as' => 'trips.intrest', 'uses' => 'tripController@intrested']);
+    Route::post('trips',                  ['as' => 'trips.create',  'uses' => 'tripController@insert']);
 });
