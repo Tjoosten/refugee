@@ -23,6 +23,13 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .form-group.required .control-label:after {
+            color: #d00;
+            content:"*";
+            margin-left: 3px;
+            top:7px;
+        }
     </style>
 </head>
 <body id="app-layout">
