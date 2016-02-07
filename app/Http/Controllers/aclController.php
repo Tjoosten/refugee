@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\user;
+use App\User;
+use App\Trips;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -14,8 +15,6 @@ use Illuminate\Support\Facades\Redirect;
  */
 class aclController extends Controller
 {
-    // TODO: Write the view for the user profile.
-
     /**
      * Class constructor
      */
@@ -37,6 +36,7 @@ class aclController extends Controller
     public function profile()
     {
         $data['title'] = 'profile' . Auth::user()->name;
+        $data['query'] = Trips::where('user_id', Auth::user()->id)->get();
         $data['tab']   = 3;
 
         return view('backend.profile', $data);
@@ -52,6 +52,7 @@ class aclController extends Controller
     public function changeUserCredentialsView()
     {
         $data['title'] = 'Account - settings' . Auth::user()->name;
+        $data['query'] = Trips::where('user_id',Auth::user()->id)->get();
         $data['tab']   = 1;
 
         return view('backend.profile', $data);
@@ -65,8 +66,11 @@ class aclController extends Controller
      * @param Request $request
      * @return Redirect
      */
-    public function changeCredentails(Request $request)
+    public function changeCredentails(userCredentialsValidator $request)
     {
+        // username will not be updated. 
+        // Bacause we need the real username. 
+
         $user           = User::find(Auth::user()->id);
         $user->email    = $request->email;
 
@@ -91,6 +95,7 @@ class aclController extends Controller
     public function changeApiCredentialsView()
     {
         $data['title'] = 'Account settings -' . Auth::user()->name;
+        $data['query'] = Trips::where('user_id', Auth::user()->id)->get();
         $data['tab']   = 2;
 
         return view('backend.profile', $data);

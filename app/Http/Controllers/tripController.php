@@ -61,10 +61,12 @@ class tripController extends Controller
     public function insert(tripValidation $request)
     {
         $data = array_add($request->except('_token'), 'user_id', Auth::user()->id);
+
+        // Mass assignement. the field names in the forms are equal to the database columns.
         Trips::create($data);
 
-        session()->flash('flash_title', '');
-        session()->flash('flash_message', '');
+        session()->flash('flash_title', 'Success!');
+        session()->flash('flash_message', 'U heeft een rit ingevoegd.');
         session()->flash('flash_message_important', false);
 
         return Redirect::back();
@@ -73,10 +75,17 @@ class tripController extends Controller
     /**
      * Delete
      *
+     * Delete a user out of the system. 
+     * REQUIRED method = softDeletes()
+     *
      * @param int $id, The id of the trip.
      */
     public function delete($id)
     {
+        if (Auth::user()->id != $id) {
+            return Redirect::back();
+        }
+
         Trips::destroy($id);
 
         session()->flash('flash_title', 'U hebt iets verwijderd!');

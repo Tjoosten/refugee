@@ -22,14 +22,14 @@
                     @if(count($query) > 0)
                         <table class="table table-sm table-hover table-bordered">
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Datum vertrek:</th>
-                                <th>Regio vertrek:</th>
-                                <th>Bestemming:</th>
-                                <th>Plaatsen:</th>
-                                <th></th> {{-- Ik wil meerijden --}}
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Datum vertrek:</th>
+                                    <th>Regio vertrek:</th>
+                                    <th>Bestemming:</th>
+                                    <th>Plaatsen:</th>
+                                    <th></th> {{-- Ik wil meerijden --}}
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($query as $trip)
