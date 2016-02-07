@@ -11,9 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Response;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -54,6 +51,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('acl/make/admin/{id}',     ['as' => 'make.admin',    'uses' => 'UserManagementController@makeAdmin']);
     Route::get('acl/make/user/{id}',      ['as' => 'make.user',     'uses' => 'userManagementController@makeUser']);
     Route::get('banned',                  ['as' => 'acl.banned',    'uses' => 'UserManagementController@banMessage']);
+
+    // Profile routes.
+    Route::get('/profile',                ['as' => 'profile',       'uses' => 'aclController@profile']);
 
     // Trips routes.
     Route::get('trips/{selector}',        ['as' => 'trips.index',   'uses' => 'tripController@index']);
