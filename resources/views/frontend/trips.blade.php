@@ -78,46 +78,46 @@
                             {{-- CSRF protection --}}
                             {{ csrf_field() }}
 
-                            <div class="form-group row">
-                                <label for="naam" class="col-sm-3 form-control-label">Naam:</label>
+                            <div class="form-group row required">
+                                <label for="naam" class="col-sm-3 form-control-label control-label">Naam:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control form-control-sm" name="name" id="naam" placeholder="Jouw naam">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-3 form-control-label">Email:</label>
+                            <div class="form-group row required">
+                                <label for="email" class="col-sm-3 form-control-label control-label">Email:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control form-control-sm" name="email" id="email" placeholder="Jouw email adres">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="telephone" class="col-sm-3 form-control-label">GSM nr:</label>
+                            <div class="form-group row required">
+                                <label for="telephone" class="col-sm-3 form-control-label control-label">GSM nr:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control form-control-sm" name="telephone" id="telephone" placeholder="Jouw GSM nr.">
                                 </div>
                             </div>
-                            <div class="form-group row {{ $errors->has('date') ? 'has-error' : '' }}">
-                                <label for="date" class="col-sm-3 form-control-label">Datum vertrek:</label>
+                            <div class="form-group row required {{ $errors->has('date') ? 'has-error' : '' }}">
+                                <label for="date" class="col-sm-3 form-control-label control-label">Datum vertrek:</label>
                                 <div class="col-sm-4">
                                     <input type="text" value="{{ old('date') }}" class="form-control form-control-sm" name="date" id="telephone" placeholder="Datum van vertrek">
                                     <small class="text-muted"> Format: dd/mm/yyyy </small>
                                 </div>
                             </div>
-                            <div class="form-group row {{ $errors->has('region') ? ' has-error' : '' }}">
-                                <label for="regio" class="col-sm-3 form-control-label">Regio:</label>
+                            <div class="form-group row required {{ $errors->has('region') ? ' has-error' : '' }}">
+                                <label for="regio" class="col-sm-3 form-control-label control-label">Regio:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control form-control-sm" name="region" value="{{ old('region') }}" id="telephone" placeholder="Vertrek regio.">
                                     <small class="text-muted">Alleen plaatsnamen.</small>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="places" class="col-sm-3 form-control-label">Beschikbare plaatsen:</label>
+                            <div class="form-group row required">
+                                <label for="places" class="col-sm-3 form-control-label control-label">Beschikbare plaatsen:</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control form-control-sm" name="places" id="telephone" placeholder="Aantal">
                                 </div>
                             </div>
-                            <div class="form-group row {{ $errors->has('destination') ? 'has-error' : '' }} ">
-                                <label for="regio" class="col-sm-3 form-control-label">Bestemming:</label>
+                            <div class="form-group row required {{ $errors->has('destination') ? 'has-error' : '' }} ">
+                                <label for="regio" class="col-sm-3 form-control-label control-label">Bestemming:</label>
                                 <div class="col-sm-4">
                                     <div class="radio">
                                         <label>
