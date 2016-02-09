@@ -17,7 +17,7 @@ class blocked
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             if (Auth::user()->status == 1) {
                 return view('errors.blocked');
             }

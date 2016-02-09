@@ -75,7 +75,7 @@ class tripController extends Controller
     /**
      * Delete
      *
-     * Delete a user out of the system. 
+     * Delete a user out of the system.
      * REQUIRED method = softDeletes()
      *
      * @param int $id, The id of the trip.
