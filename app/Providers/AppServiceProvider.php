@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Bouncer;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

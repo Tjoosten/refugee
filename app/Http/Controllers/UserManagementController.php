@@ -125,7 +125,7 @@ class UserManagementController extends Controller
         if ($status == 0) {
             // unblock
             $message = 'U hebt een gebruiker terug geactiveerd';
-        } elseif($status == 1) {
+        } elseif ($status == 1) {
             // block
             $message = 'U hebt een gebruik geblokkeer';
         } else {
