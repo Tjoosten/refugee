@@ -3,5 +3,4 @@
 /coverage
 Homestead.yaml
 Homestead.json
-/phpcs.phar
 .env
