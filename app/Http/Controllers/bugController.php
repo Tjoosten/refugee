@@ -36,8 +36,8 @@ class bugController extends Controller
     /**
      * send()
      *
-     * Send the bug report to github. 
-     * And store the user email privately. 
+     * Send the bug report to github.
+     * And store the user email privately.
      * To add later the function to email the user if the bug is closed.
      */
     public function send()
