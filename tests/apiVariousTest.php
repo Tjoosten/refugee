@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class apiVariousTest extends TestCase
 {
+    use DatabaseMigrations, DatabaseTransactions;
+
     /**
      * @group api
      */
