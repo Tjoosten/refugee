@@ -11,7 +11,7 @@ class Trips extends Model
      *
      * @var string
      */
-    protected $table = 'Trips';
+    protected $table = 'trips';
 
     /**
      * The attributes that are mass assignable.
