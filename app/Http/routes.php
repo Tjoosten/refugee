@@ -25,9 +25,10 @@
 /**
  * API routing
  */
-Route::group(['middleware' => ['api', 'auth:api']], function() {
+Route::group(['prefix' => 'api', 'middleware' => ['api', 'auth:api']], function() {
 
-        Route::get('/api' ,       'apiController@index');
+        // Misc routes.
+        Route::get('/' ,       'apiController@index');
 
         // Profile routes.
 
@@ -54,6 +55,12 @@ Route::group(['middleware' => 'web'], function () {
 
     // Profile routes.
     Route::get('/profile',                ['as' => 'profile',       'uses' => 'aclController@profile']);
+    Route::get('/profile/edit',           ['as' => 'profile.edit',  'uses' => 'aclController@changeUserCredentialsView']);
+    Route::get('/profile/edit/api',       ['as' => 'profile.api',   'uses' => 'aclController@changeApiCredentialsView']);
+
+    // Bug routes.
+    Route::get('/bug',                    ['as' => 'bug.get',       'uses' => 'bugController@view']);
+    Route::post('/bug',                   ['as' => 'bug.post',      'uses' => 'bugController@send']);
 
     // Trips routes.
     Route::get('trips/{selector}',        ['as' => 'trips.index',   'uses' => 'tripController@index']);

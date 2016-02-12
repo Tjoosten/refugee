@@ -17,6 +17,20 @@ class UserManagementTest extends TestCase
     }
 
     /**
+     * Test the redirect if a user is blocked.
+     *
+     * @group acl
+     */
+    public function testBlockedMiddleware()
+    {
+        $user = factory(App\User::class)->create(['status' => 1]);
+
+        $route = $this->actingAs($user);
+        $route->visit('/profile');
+        $route->seeStatusCode(200);
+    }
+
+    /**
      * @group acl
      *
      * Test the redirect route if the user,

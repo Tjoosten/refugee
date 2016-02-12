@@ -81,13 +81,13 @@
                                     </li>
                                 @endif
                                 <li>
-                                    <a href="">
+                                    <a href="{!! route() !!}">
                                         <span class="fa fa-btn fa-cogs"></span>
                                         Account configuratie
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="{!! route() !!}">
                                         <span class="fa fa-btn fa-file-text-o"></span>
                                         Meld een bug!
                                     </a>

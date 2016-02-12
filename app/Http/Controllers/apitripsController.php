@@ -118,7 +118,7 @@ class apitripsController extends Controller
     /**
      * Update
      *
-     * Update a resouce.
+     * Update a resource.
      *
      * @param  int $tripId , The user id.
      * @return JSON resporns

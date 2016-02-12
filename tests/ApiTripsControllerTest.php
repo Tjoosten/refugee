@@ -11,7 +11,7 @@ class ApiTripsControllerTest extends TestCase
      */
     public function testInsert()
     {
-        
+        $route = $this->visit('');
     }
     
     /**

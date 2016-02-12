@@ -9,6 +9,8 @@ class AuthControllerTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
+     * Test the register view.
+     *
      * @group authencation
      */
     public function testRegisterView()
@@ -18,6 +20,8 @@ class AuthControllerTest extends TestCase
     }
 
     /**
+     * Test the register method.
+     *
      * @group authencation
      */
     public function testRegisterMethod()
@@ -38,6 +42,8 @@ class AuthControllerTest extends TestCase
     }
 
     /**
+     * Test the login view.
+     *
      * @group authencation
      */
     public function testLoginView()
@@ -47,6 +53,8 @@ class AuthControllerTest extends TestCase
     }
 
     /**
+     * Test the login method.
+     *
      * @group authencation
      */
     public function testLoginMethod()

@@ -6,8 +6,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class homeControllerTest extends TestCase
 {
+    /**
+     * Display the index page. - GET
+     */
     public function testHomeUri()
     {
-        $this->visit('/')->seeStatusCode(200);
+        $route = $this->visit('/');
+        $route->seeStatusCode(200);
     }
 }

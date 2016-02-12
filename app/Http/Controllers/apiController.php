@@ -22,8 +22,7 @@ class apiController extends Controller
 
     public function index()
     {
-        $resource = [
-            [
+        $resource = [[
                 'name'      => 'Solidarity For All - API',
                 'developer' => [
                     'name'  => 'Tim Joosten',
