@@ -6,7 +6,7 @@ use App\Trips;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
+use League\Fractal\Manager;
 
 class apitripsController extends Controller
 {
@@ -44,24 +44,47 @@ class apitripsController extends Controller
     /**
      * insert()  - POST request.
      *
-     * TODO: Load in symfony HTTP Status code library.
-     * 
-     * @return response() 
+     * Input fields:
+     *
+     * ['user_id']     = The user id reserved for the system.
+     * ['region']      = Region where they wil departure.
+     * ['destination'] = The destination address  | 2 = Calais & 1 = Duinkerke
+     * ['date']        = The data of arrival.
+     * ['name']        = The name of the driver.
+     * ['email']       = The email address of the driver.
+     * ['telephone']   = The telephone number of the driver.
+     * ['places']      = The available places in the car(s).
+     *
+     * @param Request $request
+     * @return response
      */
-    public function insert()
+    public function insert(Request $request)
     {
         // MySQL database insert.
-        $trip = new Trips(); 
+        $trip              = new Trips();
+        $trip->user_id     = auth()->gaurd('api')->user()->id;
+        $trip->region      = $request->region;
+        $trip->destination = $request->destination;
+        $trip->date        = strtotime($request->date); // UNIX timestamp.
+        $trip->name        = $request->name;
+        $trip->email       = $request->email;
+        $trip->telephone   = $request->telephone;
+        $trip->places      = $request->places;
 
         if ($trip->save()) {
-            // Need to write logic
+            $dataArray = [
+                'status' => [
+                    'code'    => 200,
+                    'message' => 'The trip is created.',
+                ],
+            ];
         } elseif (! $trip->save()) {
             Log::error();
 
             $dataArray = [
                 'status' => [
-                    'code'    => '',
-                    'message' => '',
+                    'code'    => 500, // HTTP - Internal Error
+                    'message' => 'Trip inserted.',
                 ],
             ]; 
         }
@@ -80,6 +103,14 @@ class apitripsController extends Controller
      */
     public function delete($id)
     {
+        $trip = User::find($id);
+
+        if (auth()->gaurd('api')->user()->id != $trip->user_id) {
+            $dataArray = [
+
+            ];
+        }
+
         return response()->json($dataArray)
             ->header('Content-Type', 'application/json', 200);
     }
@@ -94,6 +125,10 @@ class apitripsController extends Controller
      */
     public function update($tripId)
     {
+        if (auth()->gaurd('api')->user()->id != $trip->user_id) {
+
+        }
+
         $trip = Trips::find($tripId);
         $trip->save();
 
