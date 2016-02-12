@@ -156,6 +156,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
+        BackupManager\Laravel\Laravel5ServiceProvider::class,
     ],
 
     /*
