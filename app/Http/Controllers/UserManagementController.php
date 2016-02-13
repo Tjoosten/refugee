@@ -39,8 +39,8 @@ class UserManagementController extends Controller
 
         // Flash method
         session()->flash('flash_title', '');
-        session()->flash('', '');
-        session()->flash('', '');
+        session()->flash('flash_message', '');
+        session()->flash('flash_message_important', '');
 
         return Redirect::route('acl');
     }
@@ -64,9 +64,9 @@ class UserManagementController extends Controller
 
 
         // Flash method
-        session()->flash('flash_title', '');
-        session()->flash('', '');
-        session()->flash('', '');
+        session()->flash('flash_title', 'Success!!');
+        session()->flash('flash_message', 'U hebt een gebruiker, gebruikers permissies gegeven.');
+        session()->flash('flash_message_important', true);
 
         return Redirect::route('acl');
     }

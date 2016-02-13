@@ -99,13 +99,30 @@
                 <div class="tab-pane" id="account">
                     <div style="padding-top: 15px;">
                         <form action="" method="POST">
+
+                            <!-- Name field -->
                             <div class="form-group required">
                                 <label for="name" class="control-label">Naam:</label>
-                                <input id="name" style="width: 30%;" type="text" disabled class="form-control">
+                                <input id="name" style="width: 30%;" type="text" value="{!! Auth::user()->name !!}" disabled class="form-control">
+                            </div>
+
+                            <!-- Email field -->
+                            <div class="form-group required">
+                                <label for="email">Email:</label>
+                                <input style="width: 30%;" class="form-control" type="email" value="{!! Auth::user()->email !!}">
+                            </div>
+
+                            <!-- Password field -->
+                            <div class="form-group">
+                                <label for="password"> Wachtwoord: </label>
+                                <input id="password" style="width: 30%;" type="text" class="form-control">
                             </div>
 
                             <button type="submit" class="btn btn-success">
                                 Wijzigen
+                            </button>
+                            <button type="reset" class="btn btn-danger">
+                                Reset
                             </button>
                         </form>
                     </div>

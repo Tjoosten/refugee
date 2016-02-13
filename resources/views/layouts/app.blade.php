@@ -56,6 +56,13 @@
                 <ul class="nav navbar-nav">
                     <li><a href="">Acties</a></li>
                     <li><a href="{!! route('trips.index', ['selector' => 'all']) !!}">Ritten</a></li>
+
+                    @if(Auth::check())
+                        <li>
+                            <a href="">Inzamelpunten</a>
+                        </li>
+                    @endif
+
                     <li><a href="">Contact</a></li>
                 </ul>
 
@@ -81,13 +88,13 @@
                                     </li>
                                 @endif
                                 <li>
-                                    <a href="{!! route() !!}">
+                                    <a href="{!! route('profile.edit') !!}">
                                         <span class="fa fa-btn fa-cogs"></span>
                                         Account configuratie
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{!! route() !!}">
+                                    <a href="{!! route('bug.get') !!}">
                                         <span class="fa fa-btn fa-file-text-o"></span>
                                         Meld een bug!
                                     </a>
