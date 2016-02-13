@@ -5,7 +5,7 @@
         <div class="col-sm-10"><h1>{!! Auth::user()->name !!}</h1></div>
         <div class="col-sm-2">
             <a href="/users" class="pull-right">
-                <img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
+                <img title="profile image" style="height: 100px; width: 100px;" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
             </a>
         </div>
     </div>
@@ -115,7 +115,8 @@
                             <!-- Password field -->
                             <div class="form-group">
                                 <label for="password"> Wachtwoord: </label>
-                                <input id="password" style="width: 30%;" type="text" class="form-control">
+                                <input id="password" placeholder="Wachtwoord" style="width: 30%;" type="text" class="form-control">
+                                <small class="help-block">Indien niet te wijzigen kunt u dit leeglaten.</small>
                             </div>
 
                             <button type="submit" class="btn btn-success">
@@ -130,7 +131,10 @@
 
                 <div class="tab-pane" id="api">
                     <div style="padding-top: 15px;">
-                        <form method="POST" action="">
+                        <form method="POST" action="{!! route('api.regenerate') !!}">
+                            {{-- CSRF protection --}}
+                            {!! csrf_field() !!}
+
                             <label for="user-email">E-mail:</label>
                             <input id="user-email" style="width: 30%" disabled value="{!! Auth::user()->email !!}" class="form-control" type="text">
                             <br />

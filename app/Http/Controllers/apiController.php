@@ -35,4 +35,9 @@ class apiController extends Controller
         return response()->json($resource)
             ->header('Content-Type', 'application/json', 200);
     }
+
+    public function regenerate()
+    {
+
+    }
 }
