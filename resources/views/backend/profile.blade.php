@@ -30,20 +30,20 @@
         <div class="col-sm-9">
 
             <ul class="nav nav-tabs" id="myTab">
-                <li class="active">
+                <li @if(Request::is('profile')) class="active" @endif>
                     <a href="#ritten" data-toggle="tab">Ritten</a>
                 </li>
-                <li>
+                <li @if(Request::is('profile/edit')) class="active" @endif>
                     <a href="#account" data-toggle="tab">Account configuratie</a>
                 </li>
-                <li>
+                <li @if(Request::is('profile/edit/api')) @endif>
                     <a href="#api" data-toggle="tab">API configuratie</a>
                 </li>
             </ul>
 
             <div class="tab-content">
 
-                <div class="tab-pane active" id="ritten">
+                <div class="tab-pane @if(Request::is('profile')) active @endif" id="ritten">
                     <div style="padding-top: 15px;">
                         @if(count($query) > 0)
                             <table class="table table-hover table-condensed table-bordered">
@@ -96,7 +96,7 @@
                     </div>
                 </div>{{-- /tab-pane --}}
 
-                <div class="tab-pane" id="account">
+                <div class="tab-pane @if(Request::is('profile/edit')) active @endif" id="account">
                     <div style="padding-top: 15px;">
                         <form action="" method="POST">
 
@@ -129,7 +129,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="api">
+                <div class="tab-pane @if(Request::is('profile/edit/api')) @endif" id="api">
                     <div style="padding-top: 15px;">
                         <form method="POST" action="{!! route('api.regenerate') !!}">
                             {{-- CSRF protection --}}

@@ -63,7 +63,7 @@ class aclController extends Controller
      *
      * Change the user credentails. - POST request
      *
-     * @param Request $request
+     * @param userCredentialsValidator|Request $request
      * @return Redirect
      */
     public function changeCredentails(userCredentialsValidator $request)
