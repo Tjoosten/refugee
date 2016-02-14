@@ -13,6 +13,9 @@ class ProfileTest extends TestCase
         parent::__construct();
     }
 
+    /**
+     * @group all
+     */
     public function testProfileTrips()
     {
         $user = factory(App\User::class)->create();
@@ -22,6 +25,9 @@ class ProfileTest extends TestCase
         $route->seeStatusCode(200);
     }
 
+    /**
+     * @group all
+     */
     public function testProfileSettingsAccount()
     {
         $user = factory(App\User::class)->create();
@@ -31,6 +37,9 @@ class ProfileTest extends TestCase
         $route->seeStatusCode(200);
     }
 
+    /**
+     * @group all
+     */
     public function testProfileSettingsApi()
     {
         $user = factory(App\User::class)->create();
@@ -38,5 +47,6 @@ class ProfileTest extends TestCase
         $route = $this->actingAs($user);
         $route->visit('/profile/edit/api');
         $route->seeStatusCode(200);
+        $route->see($user->email);
     }
 }

@@ -66,7 +66,7 @@ class UserManagementTest extends TestCase
         $route = $this->actingAs($user);
         $route->visit('/acl/block/1/' . $user->id);
         $route->seeStatusCode(200);
-        $route->see('users', ['id' => $user->id, 'status' => 5]);
+        $route->seeInDatabase('users', ['id' => $user->id, 'status' => 1]);
     }
 
     /**
@@ -84,7 +84,6 @@ class UserManagementTest extends TestCase
 
         $route = $this->actingAs($user);
         $route->visit('/acl/block/0/' . $user->id);
-        $route->seeInDatabase('users', ['id' => $user->id, 'status' => $user->status]);
         $route->seeStatusCode(200);
     }
 

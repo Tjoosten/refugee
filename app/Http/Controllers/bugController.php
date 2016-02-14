@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Github\Client;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class bugController extends Controller
 {
-    // TODO: Knplabs - GITHUB API implementation.
-
     /**
      * Class constructor.
      */
@@ -39,9 +37,31 @@ class bugController extends Controller
      * Send the bug report to github.
      * And store the user email privately.
      * To add later the function to email the user if the bug is closed.
+     *
+     * @param Request $input
      */
-    public function send()
+    public function send(Request $input)
     {
+        $client = new Client();
+        $client->authenticate('Tjoosten', '0474834880Tim!', $client::AUTH_HTTP_PASSWORD);
 
+        if (isset($input->body) || isset($input->title)) {
+            $client->api('issue')->create('Tjoosten', 'Refugee', [
+                'title' => $input->title,
+                'body'  => $input->body
+            ]);
+
+            // Success: Error created.
+            session()->flash();
+            session()->flash();
+            session()->flash();
+        } else {
+            // Error: Issue not created
+            session()->flash();
+            session()->flash();
+            session()->flash();
+        }
+
+        return Redirect::back();
     }
 }

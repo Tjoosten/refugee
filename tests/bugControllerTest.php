@@ -11,8 +11,8 @@ class bugControllerTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testBugReportingMethod()
     {
-        $this->assertTrue(true);
+
     }
 }

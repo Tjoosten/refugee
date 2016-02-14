@@ -27,13 +27,14 @@
  */
 Route::group(['prefix' => 'api', 'middleware' => ['api', 'auth:api']], function() {
 
-        // Misc routes.
-        Route::get('/' ,       'apiController@index');
+    // Misc routes.
+    Route::get('/' ,       'apiController@index');
 
-        // Profile routes.
+    // Profile routes.
 
-        // Trips
-        Route::get('/trips',   'apitripsController@index');
+    // Trips
+    Route::get('/trips',         'apitripsController@index');
+    Route::delete('/trips/{id}', 'apitripsController@delete');
 });
 
 /**

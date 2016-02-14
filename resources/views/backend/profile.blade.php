@@ -15,15 +15,11 @@
             <ul class="list-group">
                 <li class="list-group-item text-muted">Profiel:</li>
                 <li class="list-group-item text-right">
-                    <span class="pull-left"><strong>Joined</strong></span> 2.13.2014
+                    <span class="pull-left"><strong>Naam:</strong></span> {!! Auth::user()->name !!}
                 </li>
                 <li class="list-group-item text-right">
-                    <span class="pull-left"><strong>Last seen</strong></span> Yesterday
+                    <span class="pull-left"><strong>Email:</strong></span> {!! Aith::user()->email !!}
                 </li>
-                <li class="list-group-item text-right">
-                    <span class="pull-left"><strong>Real name</strong></span> Joseph Doe
-                </li>
-
             </ul>
 
         </div><!--/col-3-->
@@ -140,7 +136,7 @@
                             <br />
 
                             <label for="api-key">API sleutel:</label>
-                            <input id="api-key" style="width: 60%" value="{!! Auth::user()->api_token !!}" disabled class="form-control" type="text">
+                            <input id="api-key" style="width: 65%" value="{!! Auth::user()->api_token !!}" disabled class="form-control" type="text">
                             <br />
 
                             <button class="btn btn-primary" type="submit">Regenerate</button>

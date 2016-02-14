@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Trips;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -101,18 +102,39 @@ class apitripsController extends Controller
      * @param  int $id, The trip id. id = increment id -> Database
      * @return responss()
      */
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
+        $validator = validator()->make($request->all(), ['id' => 'required']);
+
+        if ($validator->fails()) {
+            $dataArray = [
+                'status' => [
+                    'code'  => 50,
+                    'message' => 'id required',
+                ]
+            ];
+
+            return response()->json($dataArray)
+                ->header('Content-Type', 'application/json', $dataArray['status']['code']);
+        }
+
         $trip = User::find($id);
 
         if (auth()->gaurd('api')->user()->id != $trip->user_id) {
             $dataArray = [
-
+                'status' => [
+                    'code' => 400,
+                    'message' => 'You cannot delete the trips because it is not yours.'
+                ]
             ];
         }
 
+        $dataArray = [
+
+        ];
+
         return response()->json($dataArray)
-            ->header('Content-Type', 'application/json', 200);
+            ->header('Content-Type', 'application/json', $dataArray['status']['code']);
     }
 
     /**
@@ -123,16 +145,30 @@ class apitripsController extends Controller
      * @param  int $tripId , The user id.
      * @return JSON resporns
      */
-    public function update($tripId)
+    public function update(Request $request, $tripId)
     {
         if (auth()->gaurd('api')->user()->id != $trip->user_id) {
+            $returnData = [
 
+            ];
+
+            return response()->json($returnData)
+                ->header('Content-Type', 'application/json', 200);
         }
 
         $trip = Trips::find($tripId);
+        $trip->region      = $request->region;
+        $trip->destination = $request->destination;
+        $trip->date        = strtotime($request->date); // UNIX timestamp.
+        $trip->name        = $request->name;
+        $trip->email       = $request->email;
+        $trip->telephone   = $request->telephone;
+        $trip->places      = $request->places;
         $trip->save();
 
-        $returnData = [];
+        $returnData = [
+
+        ];
 
         return response()->json($returnData)
             ->header('Content-Type', 'application/json', 200);

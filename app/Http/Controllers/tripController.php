@@ -35,8 +35,8 @@ class tripController extends Controller
         $data['title'] = "";
 
         // Trips counts
-        $data['all'] = Trips::paginate(15);
-        $data['calais'] = Trips::where('destination', 1)->get();
+        $data['all']       = Trips::paginate(15);
+        $data['calais']    = Trips::where('destination', 1)->get();
         $data['duinkerke'] = Trips::where('destination', 2)->get();
 
         // Data selection
@@ -96,7 +96,7 @@ class tripController extends Controller
     }
 
     /**
-     * intrested
+     * interested
      *
      * @param intrestValidation $request
      * @param int $tripId , The id of the trip.
