@@ -21,10 +21,13 @@ class DatabaseSeeder extends Seeder
          * SEEDER DESCRIPTION.
          * -----------------------------------------------------------------------
          *
-         * userTableSeeder = Seed the database with a root user.
+         * UserTableSeeder = Seed the database with a root user.
          *                   This user can be removed when there,
          *                   is a fully access administrator.
          *
          */
+
+        $this->call(UserTableSeeder::class);
+        $this->command->info("\nUsers table seeded.");
     }
 }

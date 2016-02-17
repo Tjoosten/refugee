@@ -81,7 +81,7 @@ class UserManagementController extends Controller
     public function userList()
     {
         if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
-            return Redirect::route('trips.index');
+            return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
         $data['title'] = trans('sfa.titleUserControl');

@@ -44,8 +44,11 @@ Route::group(['middleware' => 'web'], function () {
     // Default routes.
     Route::get('/',                       ['as' => 'home', 'uses' => 'HomeController@index']);
 
-    // Misc. routes.
+    // API routes.
     Route::post('/api/regenerate',        ['as' => 'api.regenerate', 'uses' => 'aclController@changeApiCredentials']);
+    Route::get('/api/docs/trips',         ['as' => 'api.docs',       'uses' => 'apiController@docs']);
+    Route::get('/api/docs',               ['as' => 'api.docs.info',  'uses' => 'apiController@docs']);
+
 
     // Authencation routes
     Route::auth();
@@ -61,7 +64,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile',                ['as' => 'profile',       'uses' => 'aclController@profile']);
     Route::get('/profile/edit',           ['as' => 'profile.edit',  'uses' => 'aclController@changeUserCredentialsView']);
     Route::get('/profile/edit/api',       ['as' => 'profile.api',   'uses' => 'aclController@changeApiCredentialsView']);
-    Route::post('/profile/edit',          ['ad' => 'profile.post',  'uses' => "aclController@changeCredentails"]);
+    Route::post('/profile/edit',          ['as' => 'profile.post',  'uses' => "aclController@changeCredentails"]);
+    Route::delete('/profile/delete/{id}', []);
 
     // Bug routes.
     Route::get('/bug',                    ['as' => 'bug.get',       'uses' => 'bugController@view']);

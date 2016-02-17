@@ -18,7 +18,7 @@
                     <span class="pull-left"><strong>Naam:</strong></span> {!! Auth::user()->name !!}
                 </li>
                 <li class="list-group-item text-right">
-                    <span class="pull-left"><strong>Email:</strong></span> {!! Aith::user()->email !!}
+                    <span class="pull-left"><strong>Email:</strong></span> {!! Auth::user()->email !!}
                 </li>
             </ul>
 

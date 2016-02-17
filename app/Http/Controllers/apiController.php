@@ -36,8 +36,8 @@ class apiController extends Controller
             ->header('Content-Type', 'application/json', 200);
     }
 
-    public function regenerate()
+    public function docs()
     {
-
+        return view('apidocs.apidoc');
     }
 }

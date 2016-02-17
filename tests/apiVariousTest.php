@@ -26,4 +26,34 @@ class apiVariousTest extends TestCase
                 ],
             ]);
     }
+
+    /**
+     * API Documentation
+     *
+     * @group api
+     * @link  GET - api/docs/trips
+     */
+    public function testApiDocsIndex()
+    {
+        $user = factory(App\User::class)->create();
+
+        $route = $this->actingAs($user);
+        $route->visit('/api/docs');
+        $route->seeStatusCode(200);
+    }
+
+    /**
+     * API Documentation
+     *
+     * @group api
+     * @link  GET - api/docs
+     */
+    public function testApiDocsTrips()
+    {
+        $user = factory(App\User::class)->create();
+
+        $route = $this->actingAs($user);
+        $route->visit('/api/docs/trips');
+        $route->seeStatusCode(200);
+    }
 }

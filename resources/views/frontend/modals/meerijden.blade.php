@@ -15,10 +15,12 @@
                     mee te rijden. Vervolgens zullen wij voor u een mail sturen naar de Bestuurder van het
                     voertuig om hem op de hoogte te stellen van uw intresse.
 
-                    <form method="POST" action="">
-                    <label for="passenger">Passagiers:</label>
-                    <input id="passenger" style="width: 15%" class="form-control" type="number" value="0" max="{!! $trip->places !!}" />
-                </p>
+                    @foreach($query as $trip)
+                        <form method="POST" action="">
+                        <label for="passenger">Passagiers:</label>
+                        <input id="passenger" style="width: 15%" class="form-control" type="number" value="0" max="{!! $trip->places !!}" />
+                    @endforeach
+                    </p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Versturen</button>

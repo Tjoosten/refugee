@@ -82,7 +82,9 @@ class tripController extends Controller
      */
     public function delete($id)
     {
-        if (Auth::user()->id != $id) {
+        $trip = Trips::find($id);
+
+        if (Auth::user()->id != $trip->user_id) {
             return Redirect::back();
         }
 

@@ -94,8 +94,14 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{!! route('bug.get') !!}">
+                                    <a href="{!! route('api.docs') !!}">
                                         <span class="fa fa-btn fa-file-text-o"></span>
+                                        API Documentatie
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{!! route('bug.get') !!}">
+                                        <span class="fa fa-btn fa-bug"></span>
                                         Meld een bug!
                                     </a>
                                 </li>

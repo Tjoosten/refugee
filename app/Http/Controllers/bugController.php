@@ -52,14 +52,14 @@ class bugController extends Controller
             ]);
 
             // Success: Error created.
-            session()->flash();
-            session()->flash();
-            session()->flash();
+            session()->flash('flash_title', 'Bedankt.');
+            session()->flash('flash_message', 'Wij hebben je melding geregistreerd.');
+            session()->flash('flash_message_important', true);
         } else {
             // Error: Issue not created
-            session()->flash();
-            session()->flash();
-            session()->flash();
+            session()->flash('flash_title', 'Oh Snapp :(');
+            session()->flash('flash_message', 'Wij konden je melding niet registreren.');
+            session()->flash('flash_message_important', true);
         }
 
         return Redirect::back();
