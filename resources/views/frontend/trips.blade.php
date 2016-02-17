@@ -54,7 +54,7 @@
                                                 Verwijderen
                                             </a>
                                         @else
-                                            <a href="{{route('trips.intrest', ['id' => $trip->id]) }}" class="label label-danger"> Meerijden </a>
+                                            <span class="label label-danger" data-toggle="modal" data-target="#myModal"> meerijden </span>
                                         @endif
                                     </td>
                                 </tr>
@@ -168,4 +168,6 @@
         </div>
     </div>
 </div>
+
+@include('frontend.modals.meerijden')
 @stop
