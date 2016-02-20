@@ -16,6 +16,9 @@ elixir(function(mix) {
     // Compile the SCCS files. and place them in public/css/<filename>
     mix.sass('404.scss');
 
+    // Compile the LESS files. and place them in public/css/<filename>
+    mix.less('bootstrap.less');
+
     // Run the sync system in the vagrant box for real time css changes
     // use command gulp watch for activation.
     mix.browserSync({
