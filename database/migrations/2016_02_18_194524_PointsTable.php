@@ -19,6 +19,8 @@ class PointsTable extends Migration
             $t->string('Opening_woensdag');
             $t->string('Opening_donderdag');
             $t->string('Opening_vrijdag');
+            $t->string('Opening_zaterdag');
+            $t->string('Opening_zondag');
             $t->string('adress');
             $t->string('contact');
             $t->string('naam_inzamelpunt');
