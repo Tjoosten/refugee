@@ -12,5 +12,13 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+
+    // Compile the SCCS files. and place them in public/css/<filename>
+    mix.sass('404.scss');
+
+    // Run the sync system in the vagrant box for real time css changes
+    // use command gulp watch for activation.
+    mix.browserSync({
+        proxy: 'homestead.app'
+    });
 });
