@@ -28,7 +28,7 @@ class UserManagementController extends Controller
      */
     public function makeAdmin($id)
     {
-        if (!Auth::user()->is('admin')) {
+        if (! Auth::user()->is('admin')) {
             return Redirect::route('trips.index');
         }
 
@@ -53,7 +53,7 @@ class UserManagementController extends Controller
      */
     public function makeUser($id)
     {
-        if (!Auth::user()->is('admin')) {
+        if (! Auth::user()->is('admin')) {
             return Redirect::route('trips.index');
         }
 
@@ -78,7 +78,7 @@ class UserManagementController extends Controller
      */
     public function userList()
     {
-        if (!Auth::user()->is('admin') || Auth::user()->is('developer')) {
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
@@ -104,7 +104,7 @@ class UserManagementController extends Controller
      */
     public function blockControl($status, $id)
     {
-        if (!Auth::user()->is('admin') || Auth::user()->is('developer') || Auth::user()->is('moderator')) {
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer') || Auth::user()->is('moderator')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
@@ -148,7 +148,7 @@ class UserManagementController extends Controller
     public function deleteUser($userId)
     {
         // User can be a developer or admin.
-        if (!Auth::user()->is('admin') || Auth::user()->is('developer')) {
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
