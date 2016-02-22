@@ -79,7 +79,7 @@ class apitripsController extends Controller
                     'message' => 'The trip is created.',
                 ],
             ];
-        } elseif (!$trip->save()) {
+        } elseif (! $trip->save()) {
             Log::error();
 
             $dataArray = [
