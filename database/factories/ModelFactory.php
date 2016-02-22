@@ -25,13 +25,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Trips::class, function (Faker\Generator $faker) {
     return [
         'user_id'     => 4,
-        'region'      => $faker->words(),
-        'destination' => $faker->words(),
-        'date'        => $faker->words(),
-        'name'        => $faker->words(),
-        'email'       => $faker->words(),
-        'telephone'   => $faker->words(),
-        'places'      => $faker->words(),
+        'region'      => 4,
+        'destination' => 4,
+        'date'        => 4,
+        'name'        => 4,
+        'email'       => 4,
+        'telephone'   => 4,
+        'places'      => 4,
     ];
 });
 
