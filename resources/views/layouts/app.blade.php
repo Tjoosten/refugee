@@ -5,18 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>L5</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ elixir('css/bootstrap.css') }}">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
         body {
+            padding-top: 70px;
             font-family: 'Lato';
         }
 
@@ -33,7 +34,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -58,8 +59,18 @@
                     <li><a href="{!! route('trips.index', ['selector' => 'all']) !!}">Ritten</a></li>
 
                     @if(Auth::check())
-                        <li>
-                            <a href="">Inzamelpunten</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Inzamelpunten
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('points.index') }}">Verzamel punten</a></li>
+
+                                @if(Auth::check() && Auth::user()->is('admin'))
+                                    <li><a href="">Nieuw inzamelpunt</a></li>
+                                @endif
+                            </ul>
                         </li>
                     @endif
 
@@ -88,8 +99,7 @@
                                     </li>
                                 @endif
                                 <li>
-                                    <a href="{!! route('profile.edit') !!}">
-                                        <span class="fa fa-btn fa-cogs"></span>
+                                    <a href="{!! route('profile.edit') !!}" class="fa fa-btn fa-cogs">
                                         Account configuratie
                                     </a>
                                 </li>
@@ -141,6 +151,16 @@
     <script>
         $("#alert-flash").fadeTo(2000, 500).slideUp(500, function() {
             $("#success-alert").alert('close');
+        });
+
+
+        $(document).ready(function() {
+            $('#user').tooltip({title: "Gebruiker", placement: "bottom"});
+            $('#admin').tooltip({title: "Admin", placement: "bottom"});
+            $('#block').tooltip({title: "Blokkeer", placement: "bottom"});
+            $('#unblock').tooltip({title: 'Vrijgeven', placement: "bottom"});
+            $('#profiel').tooltip({title: "Profiel", placement: "bottom"});
+            $('#verwijder').tooltip({title: "Verwijder", placement: "bottom"});
         });
     </script>
 </body>

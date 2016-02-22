@@ -60,6 +60,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('acl/make/user/{id}',      ['as' => 'make.user',     'uses' => 'userManagementController@makeUser']);
     Route::get('banned',                  ['as' => 'acl.banned',    'uses' => 'UserManagementController@banMessage']);
 
+    // Collection points
+    Route::get('points',                  ['as' => 'points.index',  'uses' => 'PointsController@index']);
+    Route::post('points',                 ['as' => 'points.post',   'uses' => 'PointsController@insert']);
+    Route::get('points/delete/{id}',           ['as' => 'points.destroy', 'uses' => 'PointsController@destroy']);
+
     // Profile routes.
     Route::get('/profile',                ['as' => 'profile',       'uses' => 'aclController@profile']);
     Route::get('/profile/edit',           ['as' => 'profile.edit',  'uses' => 'aclController@changeUserCredentialsView']);

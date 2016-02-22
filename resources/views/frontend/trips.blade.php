@@ -47,14 +47,14 @@
                                     <td> {!! $trip->places !!}</td>
                                     <td>
                                         @if(Auth::check() && $trip->user_id === Auth::user()->id)
-                                            <a href="" style="margin-right: 4px;" class="label label-danger">
+                                            <span style="margin-right: 4px;" data-toggle="modal" data-target="#wijzigen" class="label label-danger">
                                                 Bewerken
-                                            </a>
+                                            </span>
                                             <a href="{{ route('trips.delete', ['id' => $trip->id])  }}" class="label label-danger">
                                                 Verwijderen
                                             </a>
                                         @else
-                                            <span class="label label-danger" data-toggle="modal" data-target="#myModal"> meerijden </span>
+                                            <span class="label label-danger" data-toggle="modal" data-target="#meerijden"> meerijden </span>
                                         @endif
                                     </td>
                                 </tr>
@@ -84,16 +84,16 @@
                                     <input type="text" class="form-control form-control-sm" name="name" id="naam" placeholder="Jouw naam">
                                 </div>
                             </div>
-                            <div class="form-group row required">
+                            <div class="form-group row required {{ $errors->has('email') ? 'has-error' : ''  }}">
                                 <label for="email" class="col-sm-3 form-control-label control-label">Email:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control form-control-sm" name="email" id="email" placeholder="Jouw email adres">
+                                    <input type="text" class="form-control form-control-sm" name="email" value="{{ old('email') }}" id="email" placeholder="Jouw email adres">
                                 </div>
                             </div>
-                            <div class="form-group row required">
+                            <div class="form-group row required {{ $errors->has('telephone') ? 'has error' : '' }}">
                                 <label for="telephone" class="col-sm-3 form-control-label control-label">GSM nr:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control form-control-sm" name="telephone" id="telephone" placeholder="Jouw GSM nr.">
+                                    <input type="text" class="form-control form-control-sm" value="{{ old('telephone') }}" name="telephone" id="telephone" placeholder="Jouw GSM nr.">
                                 </div>
                             </div>
                             <div class="form-group row required {{ $errors->has('date') ? 'has-error' : '' }}">
@@ -110,10 +110,10 @@
                                     <small class="text-muted">Alleen plaatsnamen.</small>
                                 </div>
                             </div>
-                            <div class="form-group row required">
+                            <div class="form-group row required {{ $errors->has('places') ? 'has-error' : '' }}">
                                 <label for="places" class="col-sm-3 form-control-label control-label">Beschikbare plaatsen:</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control form-control-sm" name="places" id="telephone" placeholder="Aantal">
+                                    <input type="text" class="form-control form-control-sm" value="{{ old('places') }}" name="places" id="telephone" placeholder="Aantal">
                                 </div>
                             </div>
                             <div class="form-group row required {{ $errors->has('destination') ? 'has-error' : '' }} ">
@@ -152,15 +152,15 @@
                 Bestemmingen:
             </div>
             <div class="list-group">
-                <a class="list-group-item" href="">
+                <a class="list-group-item" href="{!! route('trips.index', ['selector' => 'all']) !!}">
                     Alle ritten
                     <span class="pull-right badge"> {!! count($all) !!} </span>
                 </a>
-                <a class="list-group-item" href="">
+                <a class="list-group-item" href="{!! route('trips.index', ['selector' => 'calais']) !!}">
                     Calais
                     <span class="pull-right badge"> {!! count($calais) !!} </span>
                 </a>
-                <a class="list-group-item" href="">
+                <a class="list-group-item" href="{!! route('trips.index', ['selector' => 'duinkerke']) !!}">
                     Duinkerke
                     <span class="pull-right badge"> {!! count($duinkerke) !!} </span>
                 </a>
@@ -170,4 +170,5 @@
 </div>
 
 @include('frontend.modals.meerijden')
+@include('frontend.modals.wijzigen')
 @stop

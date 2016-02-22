@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Trips;
 use App\Http\Requests;
+use App\Http\Requests\userCredentialsValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class aclController

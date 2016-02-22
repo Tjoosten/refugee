@@ -106,6 +106,7 @@ class apitripsController extends Controller
     {
         $validator = validator()->make($request->all(), ['id' => 'required']);
 
+        /** @var mixed $validator */
         if ($validator->fails()) {
             $dataArray = [
                 'status' => [

@@ -127,6 +127,12 @@
 
                 @elseif('api/docs/trips')
 
+                    {{-- Includes
+                    @include('apidocs.trips.')
+                    @include('apidocs.trips.')
+                    @include('apidocs.trips.')
+                     /Includes --}}
+
                 @endif
             </div> {{-- /Content --}}
         </div>

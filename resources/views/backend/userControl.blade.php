@@ -35,24 +35,30 @@
                             {{-- Functions --}}
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-danger btn-xs" href="{{ route('acl.block', ['status' => 1, 'id' => $user->id]) }}">
-                                        <span class="fa fa-lock"></span>
-                                    </a>
+                                    @if($user->status == 0)
+                                        <a id="block" class="btn btn-danger btn-xs" href="{{ route('acl.block', ['status' => 1, 'id' => $user->id]) }}">
+                                            <span class="fa fa-lock"></span>
+                                        </a>
+                                    @elseif($user->status == 1)
+                                        <a id="unblock" class="btn btn-successbtn-xs" href="">
+                                            <span class="fa fa-lock"></span>
+                                        </a>
+                                    @endif
 
                                     @if(Auth::user()->is('admin'))
-                                        <a class="btn btn-success btn-xs" href="{!! route('make.user', ['id' => $user->id]) !!}">
+                                        <a id="user" class="btn btn-success btn-xs" href="{!! route('make.user', ['id' => $user->id]) !!}">
                                             <span class="fa fa-key"></span>
                                         </a>
                                     @else
-                                        <a class="btn btn-danger btn-xs" href="{!! route('make.admin', ['id' => $user->id]) !!}">
+                                        <a id="admin" class="btn btn-danger btn-xs" href="{!! route('make.admin', ['id' => $user->id]) !!}">
                                             <span class="fa fa-key"></span>
                                         </a>
                                     @endif
 
-                                    <a href="" class="btn btn-danger btn-xs">
+                                    <a id="profiel" href="" class="btn btn-danger btn-xs">
                                         <span class="fa fa-user"></span>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" href="">
+                                    <a id="verwijder" class="btn btn-danger btn-xs" href="">
                                         <span class="fa fa-close"></span>
                                     </a>
                                 </div>

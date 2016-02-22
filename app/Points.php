@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string Opening_woensdag
  * @property string Opening_donderdag
  * @property string contact
- * @property string address
+ * @property string adress
  * @property string naam_inzamelpunt
  * @property string Opening_vrijdag
  * @property string Opening_zaterdag

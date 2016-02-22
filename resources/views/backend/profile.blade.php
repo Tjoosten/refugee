@@ -5,7 +5,7 @@
         <div class="col-sm-10"><h1>{!! Auth::user()->name !!}</h1></div>
         <div class="col-sm-2">
             <a href="/users" class="pull-right">
-                <img title="profile image" style="height: 100px; width: 100px;" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
+                <img title="profile image" style="height: 100px; width: 100px;" class="img-circle img-responsive" src="{{ url('/images/_DSC4028.jpg') }}">
             </a>
         </div>
     </div>
@@ -22,6 +22,23 @@
                 </li>
             </ul>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Machtegingen:
+
+                    @if(Auth::user()->is('admin'))
+                        <a href="{!! url('profile/permissions') !!}" class="pull-right">
+                            <span class="fa fa-wrench">
+                        </a>
+                    @endif
+                </div>
+                <div class="panel-body">
+                    @foreach(Auth::user()->roles as $role)
+                        <span class="label label-danger">{!! $role->name !!}</span>
+                    @endforeach
+                </div>
+            </div>
+
         </div><!--/col-3-->
         <div class="col-sm-9">
 
@@ -34,6 +51,9 @@
                 </li>
                 <li @if(Request::is('profile/edit/api')) @endif>
                     <a href="#api" data-toggle="tab">API configuratie</a>
+                </li>
+                <li @if(Request::is('profile/permissions') && Auth::user()->is('admin')) class="active" @endif>
+                    <a href="#permission" data-toggle="tab">Permissies</a>
                 </li>
             </ul>
 
@@ -94,7 +114,7 @@
 
                 <div class="tab-pane @if(Request::is('profile/edit')) active @endif" id="account">
                     <div style="padding-top: 15px;">
-                        <form action="" method="POST">
+                        {{ Form::open(array('url'=>'/profile/edit','files'=>true)) }}
 
                             <!-- Name field -->
                             <div class="form-group required">
@@ -143,6 +163,33 @@
                         </form>
                     </div>
                 </div> {{-- /tab-pane --}}
+
+                <div class="tab-pane @if(Request::is('profile/permissions') && Auth::user()->is('admin')) @endif" id="permission">
+                    <div style="padding-top: 15px;">
+                        {{ Form::open(array('url'=>'','files'=>true)) }}
+                            {{-- CSRF protection --}}
+                            {!! csrf_field() !!}
+
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Permissie:</th>
+                                                <th>Y</th>
+                                                <th>N</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> {{-- Tab pane --}}
+
             </div> {{-- /tab-content --}}
 
         </div><!--/col-9-->

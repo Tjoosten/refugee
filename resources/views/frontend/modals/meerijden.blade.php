@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="meerijden" role="dialog">
     <div class="modal-dialog">
 
         {{-- Modal content--}}
@@ -17,8 +17,11 @@
 
                     @foreach($query as $trip)
                         <form method="POST" action="">
-                        <label for="passenger">Passagiers:</label>
-                        <input id="passenger" style="width: 15%" class="form-control" type="number" value="0" max="{!! $trip->places !!}" />
+
+                            <div class="form-group">
+                                <label for="passenger">Passagiers:</label>
+                                <input id="passenger" style="width: 15%" class="form-control" type="number" value="0" max="{!! $trip->places !!}" />
+                            </div>
                     @endforeach
                     </p>
             </div>
