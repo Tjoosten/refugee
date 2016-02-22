@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -45,7 +44,7 @@ class UserManagementTest extends TestCase
 
         $route = $this->actingAs($user);
         $route->seeInDatabase('users', ['id' => $user->id, 'status' => $user->status]);
-        $route->visit('/acl/block/1/' . $user->id);
+        $route->visit('/acl/block/1/'.$user->id);
         $route->seeStatusCode(200);
     }
 
@@ -64,7 +63,7 @@ class UserManagementTest extends TestCase
         Bouncer::assign('admin')->to($user);
 
         $route = $this->actingAs($user);
-        $route->visit('/acl/block/1/' . $user->id);
+        $route->visit('/acl/block/1/'.$user->id);
         $route->seeStatusCode(200);
         $route->seeInDatabase('users', ['id' => $user->id, 'status' => 1]);
     }
@@ -83,7 +82,7 @@ class UserManagementTest extends TestCase
         $user = factory(App\User::class)->create(['status' => 1]);
 
         $route = $this->actingAs($user);
-        $route->visit('/acl/block/0/' . $user->id);
+        $route->visit('/acl/block/0/'.$user->id);
         $route->seeStatusCode(200);
     }
 
@@ -98,6 +97,5 @@ class UserManagementTest extends TestCase
      */
     public function testUnblockHandlingCorrectUser()
     {
-
     }
 }

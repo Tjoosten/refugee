@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Trips extends Migration
 {
@@ -12,7 +12,7 @@ class Trips extends Migration
      */
     public function up()
     {
-        /**
+        /*
          * Database columns.
          *
          * | Column      | Type         | Description            | System reserved |
@@ -32,7 +32,7 @@ class Trips extends Migration
          * | ----------- | ------------ | ---------------------- | --------------- |
          *
          */
-        Schema::create('trips', function(Blueprint $column) {
+        Schema::create('trips', function (Blueprint $column) {
             $column->increments('id');
             $column->integer('user_id');
             $column->string('region');

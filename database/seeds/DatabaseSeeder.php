@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /**
+        /*
          * Database seeders.
          *
          * The seeders are used to populate the MySQL database

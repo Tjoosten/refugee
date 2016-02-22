@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Trips;
-use App\Http\Requests;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use League\Fractal\Manager;
 
 class apitripsController extends Controller
 {
-    public $fractal; 
+    public $fractal;
 
     // TODO: Implement fractal Recsources.
     // TODO: Write API documentation.
     // TODO: Set HTTP staus code's with the symfony package.
 
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -35,7 +34,7 @@ class apitripsController extends Controller
     {
         $user = Trips::all();
 
-        // $returnData =  Fractal collection resource. 
+        // $returnData =  Fractal collection resource.
         //                This also need pagination.
 
         return response()->json($returnData)
@@ -57,20 +56,21 @@ class apitripsController extends Controller
      * ['places']      = The available places in the car(s).
      *
      * @param Request $request
+     *
      * @return response
      */
     public function insert(Request $request)
     {
         // MySQL database insert.
-        $trip              = new Trips();
-        $trip->user_id     = auth()->gaurd('api')->user()->id;
-        $trip->region      = $request->region;
+        $trip = new Trips();
+        $trip->user_id = auth()->gaurd('api')->user()->id;
+        $trip->region = $request->region;
         $trip->destination = $request->destination;
-        $trip->date        = strtotime($request->date); // UNIX timestamp.
-        $trip->name        = $request->name;
-        $trip->email       = $request->email;
-        $trip->telephone   = $request->telephone;
-        $trip->places      = $request->places;
+        $trip->date = strtotime($request->date); // UNIX timestamp.
+        $trip->name = $request->name;
+        $trip->email = $request->email;
+        $trip->telephone = $request->telephone;
+        $trip->places = $request->places;
 
         if ($trip->save()) {
             $dataArray = [
@@ -79,7 +79,7 @@ class apitripsController extends Controller
                     'message' => 'The trip is created.',
                 ],
             ];
-        } elseif (! $trip->save()) {
+        } elseif (!$trip->save()) {
             Log::error();
 
             $dataArray = [
@@ -87,7 +87,7 @@ class apitripsController extends Controller
                     'code'    => 500, // HTTP - Internal Error
                     'message' => 'Trip inserted.',
                 ],
-            ]; 
+            ];
         }
 
         return response()->json($dataArray)
@@ -95,11 +95,12 @@ class apitripsController extends Controller
     }
 
     /**
-     * Delete() 
+     * Delete().
      *
      * This will delete the trip out off the application. 
      *
-     * @param  int $id, The trip id. id = increment id -> Database
+     * @param int $id, The trip id. id = increment id -> Database
+     *
      * @return responss()
      */
     public function delete(Request $request, $id)
@@ -110,9 +111,9 @@ class apitripsController extends Controller
         if ($validator->fails()) {
             $dataArray = [
                 'status' => [
-                    'code'  => 50,
+                    'code'    => 50,
                     'message' => 'id required',
-                ]
+                ],
             ];
 
             return response()->json($dataArray)
@@ -124,9 +125,9 @@ class apitripsController extends Controller
         if (auth()->gaurd('api')->user()->id != $trip->user_id) {
             $dataArray = [
                 'status' => [
-                    'code' => 400,
-                    'message' => 'You cannot delete the trips because it is not yours.'
-                ]
+                    'code'    => 400,
+                    'message' => 'You cannot delete the trips because it is not yours.',
+                ],
             ];
         }
 
@@ -139,11 +140,12 @@ class apitripsController extends Controller
     }
 
     /**
-     * Update
+     * Update.
      *
      * Update a resource.
      *
-     * @param  int $tripId , The user id.
+     * @param int $tripId , The user id.
+     *
      * @return JSON resporns
      */
     public function update(Request $request, $tripId)
@@ -158,13 +160,13 @@ class apitripsController extends Controller
         }
 
         $trip = Trips::find($tripId);
-        $trip->region      = $request->region;
+        $trip->region = $request->region;
         $trip->destination = $request->destination;
-        $trip->date        = strtotime($request->date); // UNIX timestamp.
-        $trip->name        = $request->name;
-        $trip->email       = $request->email;
-        $trip->telephone   = $request->telephone;
-        $trip->places      = $request->places;
+        $trip->date = strtotime($request->date); // UNIX timestamp.
+        $trip->name = $request->name;
+        $trip->email = $request->email;
+        $trip->telephone = $request->telephone;
+        $trip->places = $request->places;
         $trip->save();
 
         $returnData = [

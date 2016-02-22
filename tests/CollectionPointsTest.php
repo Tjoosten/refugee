@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -13,7 +12,7 @@ class CollectionPointsTest extends TestCase
      */
     public function testIndexUri()
     {
-        $user  = factory(App\User::class)->create();
+        $user = factory(App\User::class)->create();
 
         $route = $this->actingAs($user);
         $route->visit('/points');
@@ -25,7 +24,6 @@ class CollectionPointsTest extends TestCase
      */
     public function testInsertUri()
     {
-
     }
 
     /**
@@ -33,6 +31,5 @@ class CollectionPointsTest extends TestCase
      */
     public function testInsertViewUri()
     {
-
     }
 }

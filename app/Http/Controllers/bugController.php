@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Github\Client;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -19,7 +18,7 @@ class bugController extends Controller
     }
 
     /**
-     * view()
+     * view().
      *
      * Display the bug reporting form.
      * Here users can reports several bugs in the platform.
@@ -32,7 +31,7 @@ class bugController extends Controller
     }
 
     /**
-     * send()
+     * send().
      *
      * Send the bug report to github.
      * And store the user email privately.
@@ -48,7 +47,7 @@ class bugController extends Controller
         if (isset($input->body) || isset($input->title)) {
             $client->api('issue')->create('Tjoosten', 'Refugee', [
                 'title' => $input->title,
-                'body'  => $input->body
+                'body'  => $input->body,
             ]);
 
             // Success: Error created.

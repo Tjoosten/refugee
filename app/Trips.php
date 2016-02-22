@@ -20,6 +20,6 @@ class Trips extends Model
      */
     protected $fillable = [
         'region', 'destination', 'date', 'name',
-        'email', 'telephone', 'places', 'user_id'
+        'email', 'telephone', 'places', 'user_id',
     ];
 }

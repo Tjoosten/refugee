@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Trips;
-use App\Http\Requests;
 use App\Http\Requests\userCredentialsValidator;
+use App\Trips;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Intervention\Image\Facades\Image;
 
 /**
- * Class aclController
- * @package App\Http\Controllers
+ * Class aclController.
  */
 class aclController extends Controller
 {
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -27,25 +24,26 @@ class aclController extends Controller
     }
 
     /**
-     * profile
+     * profile.
      *
      * [NOTE]: This controller will not be used in the first version.
      * get the profile settings for the user.
      *
      * @since  V1.0.0-rc, only configuration.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function profile()
     {
-        $data['title'] = 'profile' . Auth::user()->name;
+        $data['title'] = 'profile'.Auth::user()->name;
         $data['query'] = Trips::where('user_id', Auth::user()->id)->get();
-        $data['tab']   = 3;
+        $data['tab'] = 3;
 
         return view('backend.profile', $data);
     }
 
     /**
-     * changeUserCredentialsView
+     * changeUserCredentialsView.
      *
      * Change the credentails view - GET request
      *
@@ -53,28 +51,29 @@ class aclController extends Controller
      */
     public function changeUserCredentialsView()
     {
-        $data['title'] = 'Account - settings' . Auth::user()->name;
-        $data['query'] = Trips::where('user_id',Auth::user()->id)->get();
-        $data['tab']   = 1;
+        $data['title'] = 'Account - settings'.Auth::user()->name;
+        $data['query'] = Trips::where('user_id', Auth::user()->id)->get();
+        $data['tab'] = 1;
 
         return view('backend.profile', $data);
     }
 
     /**
-     * changeCredentails
+     * changeCredentails.
      *
      * Change the user credentails. - POST request
      *
      * @param userCredentialsValidator|Request $request
+     *
      * @return Redirect
      */
     public function changeCredentails(userCredentialsValidator $request)
     {
-        // username will not be updated. 
-        // Bacause we need the real username. 
+        // username will not be updated.
+        // Bacause we need the real username.
 
-        $user           = User::find(Auth::user()->id);
-        $user->email    = $request->email;
+        $user = User::find(Auth::user()->id);
+        $user->email = $request->email;
 
         if (isset($user->password)) {
             $user->password = $request->password;
@@ -86,7 +85,7 @@ class aclController extends Controller
     }
 
     /**
-     * changeApiCredentialsView
+     * changeApiCredentialsView.
      *
      * [REQUEST] - GET
      *
@@ -96,15 +95,15 @@ class aclController extends Controller
      */
     public function changeApiCredentialsView()
     {
-        $data['title'] = 'Account settings -' . Auth::user()->name;
+        $data['title'] = 'Account settings -'.Auth::user()->name;
         $data['query'] = Trips::where('user_id', Auth::user()->id)->get();
-        $data['tab']   = 2;
+        $data['tab'] = 2;
 
         return view('backend.profile', $data);
     }
 
     /**
-     * changeApiCredentials
+     * changeApiCredentials.
      *
      * [REQUEST] - POST
      *
@@ -116,7 +115,7 @@ class aclController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $user            = User::find($userId);
+        $user = User::find($userId);
         $user->api_token = str_random(60);
         $user->save();
 

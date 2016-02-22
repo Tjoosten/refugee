@@ -17,13 +17,12 @@ class UserTableSeeder extends Seeder
         User::truncate();
         \DB::statement('SET foreign_key_checks=1');
 
-
         // Insert
-        $user            = new User();
-        $user->name      = 'Tim Joosten';
-        $user->email     = 'Topairy@gmail.com';
-        $user->status    = 0;
-        $user->password  = bcrypt('root1995!');
+        $user = new User();
+        $user->name = 'Tim Joosten';
+        $user->email = 'Topairy@gmail.com';
+        $user->status = 0;
+        $user->password = bcrypt('root1995!');
         $user->api_token = str_random(60);
 
         if ($user->save()) {
