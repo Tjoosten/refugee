@@ -19,26 +19,15 @@ class ApiTripsControllerTest extends TestCase
      * Test if the user can insert a trip trough the API.
      *
      * Link: [POST]
-     *
-     * @group api
-     * @group all
      */
     public function testInsert()
     {
     }
 
-    /**
-     * @group api
-     * @group all
-     */
     public function testUpdate()
     {
     }
 
-    /**
-     * @group api
-     * @group all
-     */
     public function testDelete()
     {
         $trip = factory(App\Trips::class)->create();
@@ -48,34 +37,26 @@ class ApiTripsControllerTest extends TestCase
 
         $route = $this->delete($uri);
         $route->seeStatusCode(200);
-        $route->seeJson([
-            'status' => [
-                'code'    => 50,
-                'message' => 'id required',
-            ], ]);
     }
 
     public function testDeleteNonExistingParam()
     {
         $user = factory(App\User::class)->create();
 
-        // $route = $this->actingAs($user);
-        // $route->delete();
-        // $route->seeStatusCode(200);
+        $route = $this->actingAs($user);
+        $route->delete('/api/trips/710111?api_token='.$user->api_token);
+        $route->seeStatusCode(200);
+        $route->seeJsonEquals([
+            'status' => [
+                'code'    => 50,
+                'message' => 'id required',
+            ], ]);
     }
 
-    /**
-     * @group api
-     * @group all
-     */
     public function testShowSpecific()
     {
     }
 
-    /**
-     * @group api
-     * @group all
-     */
     public function testShowAll()
     {
         $route = $this->visit('');
