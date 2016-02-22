@@ -1,8 +1,8 @@
 <?php
 
    return [
-       /**
+       /*
         * Title transloations.
         */
-       'titleUserControl' => 'User control'
+       'titleUserControl' => 'User control',
    ];

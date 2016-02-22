@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class PointsTable extends Migration
 {
@@ -12,7 +12,7 @@ class PointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inzamelpunten', function(Blueprint $t) {
+        Schema::create('inzamelpunten', function (Blueprint $t) {
             $t->increments('id');
             $t->string('Opening_maandag');
             $t->string('Opening_dinsdag');

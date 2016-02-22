@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Trips;
 use App\Http\Requests;
-use Illuminate\Http\Request;
+use App\Http\Requests\intrestValidation;
 use App\Http\Requests\tripValidation;
+use App\Trips;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\intrestValidation;
 
 class tripController extends Controller
 {
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -23,20 +22,21 @@ class tripController extends Controller
     }
 
     /**
-     * index
+     * index.
      *
      * Get an overview off the trips. To the refugee camps.
      *
-     * @param  null $selector
+     * @param null $selector
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($selector = null)
     {
-        $data['title'] = "";
+        $data['title'] = '';
 
         // Trips counts
-        $data['all']       = Trips::paginate(15);
-        $data['calais']    = Trips::where('destination', 1)->get();
+        $data['all'] = Trips::paginate(15);
+        $data['calais'] = Trips::where('destination', 1)->get();
         $data['duinkerke'] = Trips::where('destination', 2)->get();
 
         // Data selection
@@ -52,7 +52,7 @@ class tripController extends Controller
     }
 
     /**
-     * Insert
+     * Insert.
      *
      * Insert a new trip into the system.
      *
@@ -73,7 +73,7 @@ class tripController extends Controller
     }
 
     /**
-     * Delete
+     * Delete.
      *
      * Delete a user out of the system.
      * REQUIRED method = softDeletes()
@@ -98,10 +98,10 @@ class tripController extends Controller
     }
 
     /**
-     * interested
+     * interested.
      *
      * @param intrestValidation $request
-     * @param int $tripId , The id of the trip.
+     * @param int               $tripId  , The id of the trip.
      */
     public function intrested(intrestValidation $request, $tripId)
     {
@@ -109,7 +109,7 @@ class tripController extends Controller
         $data = $request->all();
 
         // Mail trip owner
-        Mail::queue('emails.intrested_owner', $data, function($message) use ($trip) {
+        Mail::queue('emails.intrested_owner', $data, function ($message) use ($trip) {
             $message->from('topairy@gmail.com', 'Solidarity for all - TRIPS');
             $message->subject('Iemand heeft intresse om mee te rijden.');
             $message->to($trip->email);

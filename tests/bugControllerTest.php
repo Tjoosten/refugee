@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -12,6 +11,7 @@ class bugControllerTest extends TestCase
      * A basic test example.
      *
      * @group bug
+     *
      * @return void
      */
     public function testBugReportingMethod()
@@ -21,11 +21,9 @@ class bugControllerTest extends TestCase
         $route = $this->actingAs($user);
         $route->visit('bug');
         $route->seeStatusCode(200);
-
     }
 
     public function testBugSendMethod()
     {
-
     }
 }

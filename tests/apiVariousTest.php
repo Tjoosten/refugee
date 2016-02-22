@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -15,22 +14,23 @@ class apiVariousTest extends TestCase
     {
         $user = factory(App\User::class)->create();
 
-        $this->visit('/api?api_token='. $user->api_token)
+        $this->visit('/api?api_token='.$user->api_token)
             ->seeStatusCode(200)
             ->seeJson([
-                'license' => 'MIT',
-                'name'    => 'Solidarity For All - API',
+                'license'   => 'MIT',
+                'name'      => 'Solidarity For All - API',
                 'developer' => [
                     'email'   => 'Topairy@gmail.com',
-                    'name'    => 'Tim Joosten'
+                    'name'    => 'Tim Joosten',
                 ],
             ]);
     }
 
     /**
-     * API Documentation
+     * API Documentation.
      *
      * @group api
+     *
      * @link  GET - api/docs/trips
      */
     public function testApiDocsIndex()
@@ -43,9 +43,10 @@ class apiVariousTest extends TestCase
     }
 
     /**
-     * API Documentation
+     * API Documentation.
      *
      * @group api
+     *
      * @link  GET - api/docs
      */
     public function testApiDocsTrips()

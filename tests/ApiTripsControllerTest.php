@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -9,7 +8,7 @@ class ApiTripsControllerTest extends TestCase
     use DatabaseMigrations, DatabaseTransactions;
 
     /**
-     * Parent constructor
+     * Parent constructor.
      */
     public function __construct()
     {
@@ -27,7 +26,7 @@ class ApiTripsControllerTest extends TestCase
     public function testInsert()
     {
     }
-    
+
     /**
      * @group api
      * @group all
@@ -35,7 +34,7 @@ class ApiTripsControllerTest extends TestCase
     public function testUpdate()
     {
     }
-    
+
     /**
      * @group api
      * @group all
@@ -45,15 +44,15 @@ class ApiTripsControllerTest extends TestCase
         $trip = factory(App\Trips::class)->create();
         $user = factory(App\User::class)->create();
 
-        $uri = '/api/trips/' . $trip->id .'?api_token=' . $user->api_token;
+        $uri = '/api/trips/'.$trip->id.'?api_token='.$user->api_token;
 
         $route = $this->delete($uri);
         $route->seeStatusCode(200);
         $route->seeJson([
             'status' => [
-                'code'  => 50,
+                'code'    => 50,
                 'message' => 'id required',
-            ]]);
+            ], ]);
     }
 
     public function testDeleteNonExistingParam()
@@ -64,14 +63,13 @@ class ApiTripsControllerTest extends TestCase
         // $route->delete();
         // $route->seeStatusCode(200);
     }
-    
+
     /**
      * @group api
      * @group all
      */
     public function testShowSpecific()
     {
-        
     }
 
     /**

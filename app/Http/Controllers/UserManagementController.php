@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Bouncer;
-use App\user;
 use App\Sessions;
-use App\Http\Requests;
+use App\user;
+use Bouncer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class UserManagementController extends Controller
 {
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -21,7 +20,7 @@ class UserManagementController extends Controller
     }
 
     /**
-     * makeAdmin
+     * makeAdmin.
      *
      * @param $id
      *
@@ -29,7 +28,7 @@ class UserManagementController extends Controller
      */
     public function makeAdmin($id)
     {
-        if (! Auth::user()->is('admin')) {
+        if (!Auth::user()->is('admin')) {
             return Redirect::route('trips.index');
         }
 
@@ -46,7 +45,7 @@ class UserManagementController extends Controller
     }
 
     /**
-     * makeUser
+     * makeUser.
      *
      * @param $id
      *
@@ -54,14 +53,13 @@ class UserManagementController extends Controller
      */
     public function makeUser($id)
     {
-        if (! Auth::user()->is('admin')) {
+        if (!Auth::user()->is('admin')) {
             return Redirect::route('trips.index');
         }
 
         $user = User::find($id);
         Bouncer::retract('admin')->from($user);
         Bouncer::refreshFor($user);
-
 
         // Flash method
         session()->flash('flash_title', 'Success!!');
@@ -72,7 +70,7 @@ class UserManagementController extends Controller
     }
 
     /**
-     * userList
+     * userList.
      *
      * TODO: set pagination to the view.
      *
@@ -80,7 +78,7 @@ class UserManagementController extends Controller
      */
     public function userList()
     {
-        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+        if (!Auth::user()->is('admin') || Auth::user()->is('developer')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
@@ -88,29 +86,29 @@ class UserManagementController extends Controller
         $data['users'] = User::paginate(15);
 
         // User count.
-        $data['all']     = count(User::all());
-        $data['active']  = count(User::where('status', 0)->get());
+        $data['all'] = count(User::all());
+        $data['active'] = count(User::where('status', 0)->get());
         $data['blocked'] = count(User::where('status', 1)->get());
 
         return view('backend.userControl', $data);
     }
 
     /**
-     * BlockControl
+     * BlockControl.
      *
      * Block or unblock the user out off the system.
      * Preventing them to login into the system.
      *
-     * @param int $status,  The status code. 1 = Block | 0 = Unblock.
-     * @param int $id ,     The id off the user.
+     * @param int $status, The status code. 1 = Block | 0 = Unblock.
+     * @param int $id      ,     The id off the user.
      */
     public function blockControl($status, $id)
     {
-        if (! Auth::user()->is('admin') || Auth::user()->is('developer') || Auth::user()->is('moderator')) {
+        if (!Auth::user()->is('admin') || Auth::user()->is('developer') || Auth::user()->is('moderator')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
-        $user         = user::find($id);
+        $user = user::find($id);
         $user->status = $status;
         $user->save();
 
@@ -141,7 +139,7 @@ class UserManagementController extends Controller
     }
 
     /**
-     * userDelete
+     * userDelete.
      *
      * Softdelete the user. So he have time to come back.
      *
@@ -150,7 +148,7 @@ class UserManagementController extends Controller
     public function deleteUser($userId)
     {
         // User can be a developer or admin.
-        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+        if (!Auth::user()->is('admin') || Auth::user()->is('developer')) {
             return Redirect::route('trips.index', ['selector' => 'all']);
         }
 

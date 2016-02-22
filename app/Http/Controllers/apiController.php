@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Redirect;
 use League\Fractal\Manager;
-
 
 class apiController extends Controller
 {
     public $fractal;
 
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {
@@ -26,10 +22,10 @@ class apiController extends Controller
                 'name'      => 'Solidarity For All - API',
                 'developer' => [
                     'name'  => 'Tim Joosten',
-                    'email' => 'Topairy@gmail.com'
+                    'email' => 'Topairy@gmail.com',
                 ],
-                'bugs' => 'https://www.github.com/Tjoosten/Refugee/Bugs',
-                'license' => 'MIT'
+                'bugs'    => 'https://www.github.com/Tjoosten/Refugee/Bugs',
+                'license' => 'MIT',
             ]];
 
         return response()->json($resource)

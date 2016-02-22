@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -30,8 +29,8 @@ class AuthControllerTest extends TestCase
         $user = factory(App\User::class)->create();
 
         // testing variables.
-        $data['name']     = $user->name;
-        $data['email']    = $user->email;
+        $data['name'] = $user->name;
+        $data['email'] = $user->email;
         $data['password'] = bcrypt($user->password);
         $data['password_confirmation'] = bcrypt($user->password);
 
@@ -63,7 +62,7 @@ class AuthControllerTest extends TestCase
         $user = factory(App\User::class)->create();
 
         // testing variables
-        $data['name']     = $user->name;
+        $data['name'] = $user->name;
         $data['password'] = $user->password;
 
         // test login method.
