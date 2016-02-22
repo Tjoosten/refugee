@@ -15,4 +15,13 @@ All the bugs will be handled in a select developer group. And patched as fast as
 
 ## Contributing
 
+## Versioning
+
+For transparency into our release cycle and in striving to maintain backward compatibility, Refugee is maintained under 
+the Semantic Versioing guideline. Sometimes we screw up, but we'll adhere to those rules whenever possible. 
+
+See the Releases section of our Github project for changelogs for each release version of Refugee.
+
 ## Copyright & license
+
+Code a&nd documentation copyright 2015 - 2016 Tim Joosten. Code released under the MIT License. Docs released under Creative Commons. 
