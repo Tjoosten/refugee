@@ -1,7 +1,8 @@
 # Solidarity for all - TRIPS
 
 [![StyleCI](https://styleci.io/repos/50099245/shield)](https://styleci.io/repos/50099245)
-![](https://reposs.herokuapp.com/?path=Tjoosten/refugee&style=flat)
+![](https://reposs.herokuapp.com/?path=Tjoosten/refugee&style=flat-square)
+[![Dependency Status](https://david-dm.org/tjoosten/refugee.svg?style=flat-square)](https://david-dm.org/tjoosten/refugee)
 
 
 A platform that manage trips to the refugee camps. (Duinkerke, Calais). 
