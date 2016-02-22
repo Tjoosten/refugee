@@ -1,5 +1,7 @@
 # Solidarity for all - TRIPS
 
+[![StyleCI](https://styleci.io/repos/50099245/shield)](https://styleci.io/repos/50099245)
+
 A platform that manage trips to the refugee camps. (Duinkerke, Calais). 
 
 ## Installation
