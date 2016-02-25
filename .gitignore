@@ -5,3 +5,5 @@ phpcs.phar
 Homestead.yaml
 Homestead.json
 .env
+.idea
+offline-issues

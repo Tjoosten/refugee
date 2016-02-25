@@ -13,8 +13,8 @@ class CreateCacheTable extends Migration
     public function up()
     {
         Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->unique();
-            $table->text('value');
+            $table->string('key')->unique()->comment('the key off the cache');
+            $table->text('value')->comment('the value off the cache');
             $table->integer('expiration');
         });
     }
