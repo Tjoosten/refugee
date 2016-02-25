@@ -18,6 +18,7 @@ addons:
       - nodejs
 before_script:
   - composer install
+  - composer self-update
 
 script:
   - phpunit
