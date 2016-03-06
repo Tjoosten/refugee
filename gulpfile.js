@@ -22,6 +22,22 @@ elixir(function(mix) {
     // Cache busting
     mix.version('css/bootstrap.css');
 
+    // Compile the JS.
+    mix.scripts([
+        'affix.js',
+        'alert.js',
+        'button.js',
+        'carousel.js',
+        'collapse.js',
+        'dropdown.js',
+        'modal.js',
+        'popover.js',
+        'scrollspy.js',
+        'tab.js',
+        'tooltip.js',
+        'transition.js'
+    ], 'public/js/bootstrap.js');
+
     // Run the sync system in the vagrant box for real time css changes
     // use command gulp watch for activation.
     mix.browserSync({
