@@ -11,7 +11,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['title'] = '';
+        $data['title'] = trans('');
         return view('home', $data);
     }
 }
