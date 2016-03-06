@@ -87,8 +87,8 @@ class PointsController extends Controller
         $point->Opening_zondag = empty($request->zondag)    ? 'Gesloten' : $request->zondag;
         $point->save(); // Save all data
 
-        session()->flash();
-        session()->flash();
-        session()->flash();
+        session()->flash('flash_title', 'success');
+        session()->flash('flash_message', 'U hebt een inzamelpunt aangepast');
+        session()->flash('flash_message_important', true);
     }
 }

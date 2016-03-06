@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserManagementController extends Controller
 {
+    // TODO: set permission check to middleware.
+
     /**
      * Class constructor.
      */
@@ -28,18 +30,17 @@ class UserManagementController extends Controller
      */
     public function makeAdmin($id)
     {
-        if (! Auth::user()->is('admin')) {
-            return Redirect::route('trips.index');
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+            return Redirect::route('trips.index', ['Selector' => 'all']);
         }
 
         $user = User::find($id);
         Bouncer::assign('admin')->to($user);
         Bouncer::refreshFor($user);
 
-        // Flash method
-        session()->flash('flash_title', '');
-        session()->flash('flash_message', '');
-        session()->flash('flash_message_important', '');
+        session()->flash('flash_title', 'success');
+        session()->flash('flash_message', 'U hebt een gebruiker admin rechten gegeven');
+        session()->flash('flash_message_important', false);
 
         return Redirect::route('acl');
     }
@@ -53,8 +54,8 @@ class UserManagementController extends Controller
      */
     public function makeUser($id)
     {
-        if (! Auth::user()->is('admin')) {
-            return Redirect::route('trips.index');
+        if (! Auth::user()->is('admin') || Auth::user()->is('developer')) {
+            return Redirect::route('trips.index', ['selector' => 'all']);
         }
 
         $user = User::find($id);
@@ -125,7 +126,7 @@ class UserManagementController extends Controller
             $message = 'U hebt een gebruiker terug geactiveerd';
         } elseif ($status == 1) {
             // block
-            $message = 'U hebt een gebruik geblokkeer';
+            $message = 'U hebt een gebruiker geblokkeerd';
         } else {
             // unknown
             $message = 'wij konden niet uitmaken welke handeling u wou uitvoeren.';
@@ -155,8 +156,8 @@ class UserManagementController extends Controller
         $user = User::find($userId);
         $user->delete();
 
-        session()->flash('flash_title', '');
-        session()->flash('flash_message', '');
+        session()->flash('flash_title', 'sucess!');
+        session()->flash('flash_message', 'U hebt een gebruiker geblokkeerd');
         session()->flash('flash_message_important', false);
 
         return Redirect::route('trips.index');
