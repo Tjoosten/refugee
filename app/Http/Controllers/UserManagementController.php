@@ -125,7 +125,7 @@ class UserManagementController extends Controller
             $message = 'U hebt een gebruiker terug geactiveerd';
         } elseif ($status == 1) {
             // block
-            $message = 'U hebt een gebruik geblokkeer';
+            $message = 'U hebt een gebruiker geblokkeerd';
         } else {
             // unknown
             $message = 'wij konden niet uitmaken welke handeling u wou uitvoeren.';
@@ -155,8 +155,8 @@ class UserManagementController extends Controller
         $user = User::find($userId);
         $user->delete();
 
-        session()->flash('flash_title', '');
-        session()->flash('flash_message', '');
+        session()->flash('flash_title', 'sucess!');
+        session()->flash('flash_message', 'U hebt een gebruiker geblokkeerd');
         session()->flash('flash_message_important', false);
 
         return Redirect::route('trips.index');

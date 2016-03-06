@@ -7,12 +7,13 @@
 
         <title>Solidarity for all - API Documentatie.</title>
 
-        {{-- Fonts --}}
+        <!-- Fonts -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
-        {{-- Styles --}}
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ elixir('css/bootstrap.css') }}">
+        {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
         <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
         {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -104,7 +105,7 @@
 
                         @elseif(Request::is('api/docs/bugs'))
 
-                            <a class="list-group-item" href=""></a>
+                            <a class="list-group-item" href="">Rapporteer een fout.</a>
 
                         @endif
                     </div>
@@ -126,12 +127,21 @@
                     {{-- /Includes --}}
 
                 @elseif('api/docs/trips')
+                    <div style="margin-top: -20px;" class="page-header">
+                        <h2>Ritten gedeelte - API</h2>
+                    </div>
 
-                    {{-- Includes
-                    @include('apidocs.trips.')
-                    @include('apidocs.trips.')
-                    @include('apidocs.trips.')
-                     /Includes --}}
+                    <p>
+                        In dit gedeelte vindt u de info over het ritten gedeelte in de api. Voor de authencatie
+                        methode raden wij u aan om eerst de algemene documentatie door te nemen. Daar vind u ook tevens
+                        hoe u aan een API token komt.
+                    </p>
+
+                    {{-- Includes --}}
+                    @include('apidocs.trips.new')
+                    @include('apidocs.trips.update')
+                    @include('apidocs.trips.delete')
+                    {{-- /includes --}}
 
                 @endif
             </div> {{-- /Content --}}
