@@ -24,9 +24,9 @@ class UserManagementController extends Controller
     /**
      * makeAdmin.
      *
-     * @param $id
+     * @param int, $id the id of the user.
      *
-     * @return
+     * @return Redirect
      */
     public function makeAdmin($id)
     {
@@ -144,7 +144,7 @@ class UserManagementController extends Controller
      *
      * Softdelete the user. So he have time to come back.
      *
-     * @param $userId
+     * @param int $userId, the id of the user.
      */
     public function deleteUser($userId)
     {

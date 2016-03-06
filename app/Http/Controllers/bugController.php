@@ -50,7 +50,7 @@ class bugController extends Controller
         $client = new Client();
         $client->authenticate('Tjoosten', '0474834880Tim!', $client::AUTH_HTTP_PASSWORD);
 
-        $client->api('issue')->create('Tjoosten', 'Refugee', [
+        $client->api('issues')->create(env('GIT_NAME'), env('GIT_REPO'), [
             'title' => $input->title,
             'body'  => $input->body,
         ]);

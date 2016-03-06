@@ -101,7 +101,7 @@ class apitripsController extends Controller
      *
      * @param Request $request
      * @param int $id , The trip id. id = increment id -> Database
-     * @return responss
+     * @return response
      */
     public function delete(Request $request, $id)
     {

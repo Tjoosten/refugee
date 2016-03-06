@@ -4,6 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int   user_id     The id off the user.
+ * @property mixed region      The region he depart form
+ * @property mixed destination The refugee camp he wants to visit
+ * @property int   date        The date he want to drive
+ * @property mixed name
+ * @property mixed telephone
+ * @property mixed email
+ * @property mixed places
+ */
 class Trips extends Model
 {
     /**
