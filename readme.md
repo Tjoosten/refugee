@@ -2,6 +2,7 @@
 
 [![StyleCI](https://styleci.io/repos/50099245/shield)](https://styleci.io/repos/50099245)
 [![Dependency Status](https://david-dm.org/tjoosten/refugee.svg?style=flat-square)](https://david-dm.org/tjoosten/refugee)
+[![Build Status](https://travis-ci.org/Tjoosten/refugee.svg?branch=master)](https://travis-ci.org/Tjoosten/refugee)
 
 
 A platform that manage trips to the refugee camps. (Duinkerke, Calais). 
