@@ -19,7 +19,7 @@ class blocked
     {
         if (Auth::check()) {
             if (Auth::user()->status == 1) {
-                $data['title'] = '';
+                $data['title'] = trans('');
 
                 return view('errors.blocked', $data);
             }

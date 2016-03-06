@@ -32,7 +32,7 @@ class tripController extends Controller
      */
     public function index($selector = null)
     {
-        $data['title'] = '';
+        $data['title'] = trans();
 
         // Trips counts
         $data['all'] = Trips::paginate(15);
@@ -84,7 +84,7 @@ class tripController extends Controller
     {
         $trip = Trips::find($id);
 
-        if (Auth::user()->id != $trip->user_id) {
+        if (Auth::user()->id != $trip->user_id || Auth::user()->is('admin') || Auth::user()->is('developer')) {
             return Redirect::back();
         }
 
@@ -115,6 +115,7 @@ class tripController extends Controller
             $message->to($trip->email);
         });
 
+        // TODO: Debug the commented code.
         // Mail intrested person.
         // Mail::queue('emails.intrested_person', $data, function($message) use ($request) {
         //    $message->from('topairy@gmail.com', 'Solidarity for all - TRIPS');

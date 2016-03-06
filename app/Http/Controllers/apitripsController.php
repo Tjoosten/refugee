@@ -13,7 +13,7 @@ class apitripsController extends Controller
     public $fractal;
 
     // TODO: Implement fractal Recsources.
-    // TODO: Write API documentation.
+    // TODO: Write API documentation. <- In Progress
     // TODO: Set HTTP staus code's with the symfony package.
 
     /**
@@ -97,11 +97,11 @@ class apitripsController extends Controller
     /**
      * Delete().
      *
-     * This will delete the trip out off the application. 
+     * This will delete the trip out off the application.
      *
-     * @param int $id, The trip id. id = increment id -> Database
-     *
-     * @return responss()
+     * @param Request $request
+     * @param int $id , The trip id. id = increment id -> Database
+     * @return responss
      */
     public function delete(Request $request, $id)
     {

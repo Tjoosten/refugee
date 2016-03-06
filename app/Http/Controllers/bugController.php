@@ -46,6 +46,7 @@ class bugController extends Controller
      */
     public function send(githubValidator $input)
     {
+        // TODO: Set credentials to the .env file.
         $client = new Client();
         $client->authenticate('Tjoosten', '0474834880Tim!', $client::AUTH_HTTP_PASSWORD);
 
