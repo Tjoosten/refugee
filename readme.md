@@ -25,4 +25,4 @@ See the Releases section of our Github project for changelogs for each release v
 
 ## Copyright & license
 
-Code a&nd documentation copyright 2015 - 2016 Tim Joosten. Code released under the MIT License. Docs released under Creative Commons. 
+Code and documentation copyright 2015 - 2016 Tim Joosten. Code released under the MIT License. Docs released under Creative Commons. 
