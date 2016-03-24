@@ -19,6 +19,13 @@ elixir(function(mix) {
     // Compile the LESS files. and place them in public/css/<filename>
     mix.less('bootstrap.less');
 
+    // Copy fonts to the public DIR.
+    // mix.copy('./resources/assets/fonts/glyphicons-regular.eot', 'public/fonts/glyphicons-regular.eot');
+    // mix.copy('./resources/assets/fonts/glyphicons-regular.tff', 'public/fonts/glyphicons-regular.tff');
+    // mix.copy('./resources/assets/fonts/glyphicons-regular.svg', 'public/fonts/glyphicons-regular.svg');
+    // mix.copy('./resources/assets/fonts/glyphicons-regular.woff', 'public/fonts/glyphicons-regular.woff');
+    // mix.copy('resources/assets/fonts/glyphicons-regular.woff2', 'public/fonts/glyphicons-regular.woff2');
+
     // Cache busting
     mix.version('css/bootstrap.css');
 

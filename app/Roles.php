@@ -13,6 +13,11 @@ class Roles extends Model
      */
     protected $table = 'roles';
 
+    /**
+     * Show the role(s) for the giving user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function user()
     {
         return $this->belongsToMany('App\Roles', 'user_roles', 'user_id', 'role_id');

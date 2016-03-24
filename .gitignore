@@ -2,8 +2,9 @@
 /node_modules
 phpcs.phar
 /coverage
+/.vagrant
 Homestead.yaml
-Homestead.json
 .env
+/Homestead.yaml
 /.idea
 offline-issues
