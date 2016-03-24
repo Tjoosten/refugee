@@ -1,1 +1,1 @@
-{"virtualbox":{"/home/vagrant/laravel":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/laravel","hostpath":"/Users/tim/Downloads/laravel","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/tim/Downloads/laravel","disabled":false}}}
+{"virtualbox":{"/home/vagrant/refugee":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/refugee","hostpath":"/Users/tim/Desktop/refugee","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/tim/Desktop/refugee","disabled":false}}}
